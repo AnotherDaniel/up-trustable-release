@@ -1,0 +1,14 @@
+settings:
+  digits: 1
+  itemformat: markdown
+  parent: TRUSTABLE
+  prefix: TT
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "Trustable Tenets"
+      name: "Trustable Tenets (TT)"
+      ref: "TT"
+  publish:
+    - report

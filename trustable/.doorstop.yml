@@ -1,0 +1,13 @@
+settings:
+  digits: 1
+  itemformat: markdown
+  prefix: TRUSTABLE
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "Trustable"
+      name: "Trustable (TRUSTABLE)"
+      ref: "TRUSTABLE"
+  publish:
+    - report

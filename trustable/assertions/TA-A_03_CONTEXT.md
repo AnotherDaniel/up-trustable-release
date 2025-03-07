@@ -10,14 +10,14 @@ reviewed: a2m5lV2Gzl091lBm1fYHqJaCTxAhSexd_82GyTP_8T4=
 
 **Guidance**
 
-This assertion is satisfied if the construction of a given iteration of XYZ is
+This assertion is satisfied if the construction of a given iteration of uProtocol is
 both *repeatable*, demonstrating that all of the required inputs are controlled,
 and *reproducible*, demonstrating that the construction toolchain and build
 environment(s) are controlled (as described by TA-A_04).
 
 This assertion can be most effectively satisfied in a Continuous Integration
 environment with mirrored projects (see TA-A_01), using build servers that have
-no internet access. The aim is to show that all build tools, XYZ components and
+no internet access. The aim is to show that all build tools, uProtocol components and
 dependencies are built from inputs that we control, that rebuilding leads to
 precisely the same binary fileset, and that builds can be repeated on any
 suitably configured server.

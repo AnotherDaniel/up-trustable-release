@@ -9,4 +9,4 @@ ref: ''
 reviewed: BIRq9AX7oBmP_E79KiNu6x90e_EezudGjXXO0GmhpYg=
 ---
 
-All sources for XYZ and tools are mirrored in our controlled environment
+All sources for uProtocol and tools are mirrored in our controlled environment

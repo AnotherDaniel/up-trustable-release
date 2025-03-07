@@ -9,5 +9,5 @@ ref: ''
 reviewed: Rv-AO2FMmzMdO4lAKDxJ69syq28LiAKo7iyw2CPyNxU=
 ---
 
-Documentation is provided, specifying what XYZ is expected to do, and what
+Documentation is provided, specifying what uProtocol is expected to do, and what
 it must not do, and how this is verified.

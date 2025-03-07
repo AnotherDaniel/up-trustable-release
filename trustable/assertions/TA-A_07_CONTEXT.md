@@ -10,7 +10,7 @@ reviewed: YKHWLwnjX5Q3C_FtJ68bVH21m5hW-_dqfLBilUT65F4=
 
 **Guidance**
 
-This assertion requires that that we have control over all changes to XYZ,
+This assertion requires that that we have control over all changes to uProtocol,
 including changes to the configurations, components and tools we use to build
 it, and the versions of dependencies that we use.
 
@@ -24,7 +24,7 @@ software.
 **Confidence scoring**
 
 CS-A_07 is based on confidence that we have
-control over the changes that we make to XYZ, including its configuration and
+control over the changes that we make to uProtocol, including its configuration and
 dependencies.
 
 **Checklist**

@@ -9,5 +9,5 @@ ref: ''
 reviewed: K96Hv2tA27sBNIyz9tyzJLtg8axuLmrthpLHTrvEjkY=
 ---
 
-Prohibited misbehaviours for XYZ are identified, and mitigations are specified,
+Prohibited misbehaviours for uProtocol are identified, and mitigations are specified,
 verified and validated based on analysis.

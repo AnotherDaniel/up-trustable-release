@@ -9,4 +9,4 @@ ref: ''
 reviewed: zYrzYJKo_daL9tLs3TxpmrfqbR9E3SM27QPMCGCWwAw=
 ---
 
-Confidence in XYZ is measured based on results of analysis
+Confidence in uProtocol is measured based on results of analysis

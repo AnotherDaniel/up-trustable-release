@@ -9,4 +9,4 @@ ref: ''
 reviewed: 8cWvoTZCqgQQrRfmaMOGY3SlNN7q5W5CYNGzrzuNDIM=
 ---
 
-Confidence in XYZ is measured by analysing actual performance in tests and in production.
+Confidence in uProtocol is measured by analysing actual performance in tests and in production.

@@ -9,5 +9,5 @@ ref: ''
 reviewed: J9ghnPSSkA6pllqxkSmHqlRrCLI-fVztNf_uD3bE8_8=
 ---
 
-Expected or required behaviours for XYZ are identified, specified, verified and
+Expected or required behaviours for uProtocol are identified, specified, verified and
 validated based on analysis.

@@ -9,5 +9,5 @@ ref: ''
 reviewed: UpOkuadAOFHpUXzjPkpFAXgJfU7u9IpA7PL1_I-8w6c=
 ---
 
-XYZ is actively maintained, with regular updates to dependencies, and changes
+uProtocol is actively maintained, with regular updates to dependencies, and changes
 are verified to prevent regressions.

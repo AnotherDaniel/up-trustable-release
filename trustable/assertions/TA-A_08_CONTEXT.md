@@ -13,11 +13,11 @@ reviewed: mFb4TOsFZF0tsgWeEewXqSo-BIirMVnhV8aGFHAXG9w=
 Although it is practically impossible to specify all of the necessary behaviours
 and required properties for complex software, we must clearly specify the most
 important of these (e.g. where harm could result if given criteria are not met),
-and verify that these are correctly provided by XYZ.
+and verify that these are correctly provided by uProtocol.
 
 The specified expectations should be verified using tests, which demonstrate
 that the required properties of behaviours are present for a specified set of
-use cases and/or system contexts for XYZ. The effectiveness of these tests
+use cases and/or system contexts for uProtocol. The effectiveness of these tests
 should also be confirmed by appropriate and credible validation strategies, such
 as false negative testing (reproducing a test's failure conditions and
 confirming that it fails as expected).

@@ -12,11 +12,11 @@ reviewed: NPLdtt6LOAfycG7oPl86X4MURzBAZ29OOiBm5GQGlYE=
 
 While most modern software is developed without a formal
 requirement/specification process, we need to be clear about what we expect
-from XYZ, communicate these expectations, and verify that they are met.
+from uProtocol, communicate these expectations, and verify that they are met.
 
 In most (almost all?) cases, we need to verify our expectations by
 tests. These tests must be automated and applied for every candidate release
-of XYZ.
+of uProtocol.
 
 It is not sufficient to demonstrate that the software does what we expect. We
 also need to analyse the potential risks in our scenario, identify

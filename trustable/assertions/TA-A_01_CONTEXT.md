@@ -11,9 +11,9 @@ reviewed: NDeplgwLGwndPWVWI281DlJN0rGnLOfL-mGZJ2UXZ8g=
 **Guidance**
 
 This assertion is satisfied to the extent that we have traced and captured
-source code for XYZ and all of its dependencies (including transitive
+source code for uProtocol and all of its dependencies (including transitive
 dependencies, all the way down), and for all of the tools used to construct
-XYZ from source, and have mirrored versions of these inputs under our control.
+uProtocol from source, and have mirrored versions of these inputs under our control.
 
 'Mirrored' in this context means that we have a version of the upstream project
 that we keep up-to-date with additions and changes to the upstream project,
@@ -32,10 +32,10 @@ binaries present within the repositories of the components and tools used.
 
 **Evidence**
 
-- list of all XYZ components including
+- list of all uProtocol components including
     - URL of mirrored projects in controlled environment
     - URL of upstream projects
-- successful build of XYZ from source
+- successful build of uProtocol from source
     - without access to external source projects
     - without access to cached data
 - update logs for mirrored projects

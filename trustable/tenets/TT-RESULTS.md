@@ -9,5 +9,5 @@ ref: ''
 reviewed: XVry2iLugrA9r0sWzlxKLfgS5JgP7XtVrsDmxgJoDEI=
 ---
 
-Evidence is provided to demonstrate that XYZ does what it is supposed to
+Evidence is provided to demonstrate that uProtocol does what it is supposed to
 do, and does not do what it must not do.

@@ -20,9 +20,9 @@ Potential warning indicators may be derived by analysis of source code,
 by consideration of test results, and by troubleshooting observed faults.
 
 The mechanisms used to collect warning indicator data must themselves be
-considered in the Trustable scope of XYZ. Thus they should be covered by new
+considered in the Trustable scope of uProtocol. Thus they should be covered by new
 or improved Expectations, some of which may need to be satisfied by users or
-integrators of XYZ.
+integrators of uProtocol.
 
 Note that we can consider coverage here, by counting how many of the identified
 misbehaviours we are unable to find indicators for.

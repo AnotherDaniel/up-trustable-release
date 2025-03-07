@@ -11,7 +11,7 @@ reviewed: lsdVz-bGIYLQEjsdEbTCpBbO1bPXkyL881B6wgx83uk=
 **Guidance**
 
 This assertion is satisfied to the extent that test data, and data collected
-from monitoring of deployed versions of XYZ, has been analysed, and the results
+from monitoring of deployed versions of uProtocol, has been analysed, and the results
 used to inform the refinement of expectations and risk analysis.
 
 The extent of the analysis is with sufficient precision to confirm that:

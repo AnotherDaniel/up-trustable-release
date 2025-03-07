@@ -11,13 +11,13 @@ reviewed: PcYChAW6A1fm4aDXw36_bRXBxIXowQueJ6F5dZXFaDw=
 **Guidance**
 
 This assertion is satisfied to the extent that we have identified, triaged
-and applied fixes and/or mitigations to the faults identified in XYZ and the
+and applied fixes and/or mitigations to the faults identified in uProtocol and the
 bugs and CVEs identified by upstream component projects.
 
 We can increase confidence by assessing known faults, bugs and vulnerabilities,
-to establish their relevance and impact for XYZ.
+to establish their relevance and impact for uProtocol.
 
-In principle this should involve not just the code in XYZ, but also its
+In principle this should involve not just the code in uProtocol, but also its
 dependencies (all the way down), and the tools used to construct the release.
 However we need to weigh the cost/benefit of this work, taking into account
 
@@ -32,19 +32,19 @@ However we need to weigh the cost/benefit of this work, taking into account
 - List of known CVEs fixed since last release
 - List of outstanding CVEs still not fixed, with triage/prioritisation based
   on severity/relevance/impact
-- List of XYZ component versions, showing where a newer version exists upstream
+- List of uProtocol component versions, showing where a newer version exists upstream
 - List of component version updates since last release
 - List of fixes applied to developed code since last release
 - List of fixes for developed code that are outstanding, not applied yet
-- List of XYZ faults outstanding (O)
-- List of XYZ faults fixed since last release (F)
-- List of XYZ faults mitigated since last release (M)
+- List of uProtocol faults outstanding (O)
+- List of uProtocol faults fixed since last release (F)
+- List of uProtocol faults mitigated since last release (M)
 
 **Confidence scoring**
 
 CS-A_06 can be based on
 
-- some function of [O, F, M] for XYZ
+- some function of [O, F, M] for uProtocol
 - number of outstanding relevant bugs from components
 - bug triage results, accounting for undiscovered bugs
 - number of outstanding CVEs
@@ -57,7 +57,7 @@ Each iteration, we should improve the algorithm based on measurements
 
 **Checklist**
 
-- How many faults have we identified in XYZ?
+- How many faults have we identified in uProtocol?
 - How many unknown faults remain to be found, based on the number that have
   been processed so far?
 - Is there any possibility that people could be motivated to manipulate the

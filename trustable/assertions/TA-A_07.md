@@ -9,5 +9,5 @@ ref: ''
 reviewed: NVMf7LZs7EkICfx-ac3J-lBruHVrAVCZ00JkBwhCYzQ=
 ---
 
-XYZ components, configurations and tools are updated under specified change and
+uProtocol components, configurations and tools are updated under specified change and
 configuration management controls.

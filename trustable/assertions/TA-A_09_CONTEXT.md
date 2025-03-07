@@ -11,10 +11,10 @@ reviewed: NQvDTtu0ZRPZM9a35TRWSUZHBI4aTOqHQ04ARHmiFs0=
 **Guidance**
 
 This assertion is satisfied to the extent that we have identified misbehaviours
-that can interfere with the Expectations of XYZ, and can demonstrate what
+that can interfere with the Expectations of uProtocol, and can demonstrate what
 happens when they occur.
 
-After defining what we expect from XYZ in TA-A_08, we need to analyse what
+After defining what we expect from uProtocol in TA-A_08, we need to analyse what
 could go wrong. This may be achieved by:
 
 * applying risk/hazard analysis techniques (e.g. HAZOP, FMEDA, STPA)
@@ -23,7 +23,7 @@ could go wrong. This may be achieved by:
 * identifying other misbehaviours via test data analysis (see TA-A_13).
 
 The outputs of risk / hazard analysis should be a set of short sentences
-describing prohibited misbehaviours or failure modes of XYZ, and a set of new or
+describing prohibited misbehaviours or failure modes of uProtocol, and a set of new or
 improved Expectations addressing these misbehaviours.
 
 By comparing the set of misbehaviours with the set of Expectations from
@@ -32,7 +32,7 @@ misbehaviour for each Expectation.
 
 We can use Fault Induction to verify that the tests developed to detect these
 misbehaviours fail when they occur. We can also use this technique, along with
-stress and soak testing, to verify that features of XYZ intended to prevent or
+stress and soak testing, to verify that features of uProtocol intended to prevent or
 mitigate misbehaviours perform as expected. Examples of this include:
 
 - adding programming errors and misconfigurations into the target software

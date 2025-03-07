@@ -13,10 +13,10 @@ reviewed: 6KVvp4khRUd4fZgtK26F8dRYSgOc82TZ8Q7ZRIhXsH8=
 This assertion is satisfied to the extent that all of the tests specified in
 TA-A_08 and constructed in TA-A_04 are correctly executed in a controlled
 environment on a defined cadence (e.g. daily) or for each proposed change, and
-on all candidate release builds for XYZ.
+on all candidate release builds for uProtocol.
 
 Note that correct behaviour of tests may be confirmed using fault induction
-(e.g. by introducing an error or misconfiguration into XYZ).
+(e.g. by introducing an error or misconfiguration into uProtocol).
 
 **Evidence**
 

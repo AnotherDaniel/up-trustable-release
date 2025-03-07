@@ -9,5 +9,5 @@ ref: ''
 reviewed: IVgnSoaV2YejhOa8EqV5Yey5SQlwX8FF4T6a93gJMVE=
 ---
 
-Tools are provided to build XYZ from trusted sources (also provided) with
+Tools are provided to build uProtocol from trusted sources (also provided) with
 full reproducibility.

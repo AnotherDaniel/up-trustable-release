@@ -11,8 +11,8 @@ reviewed: cqooWN8UVJWLwenB-g4toFZst0QKBj8Yw7uSWXKh11Y=
 **Guidance**
 
 To satisfy this assertion, the manual processes applied in the verification of
-XYZ must be documented, together with the methodologies used, the results of
-applying these processes to specific aspects and iterations of XYZ or its
+uProtocol must be documented, together with the methodologies used, the results of
+applying these processes to specific aspects and iterations of uProtocol or its
 components, and evidence that they have been reviewed using documented criteria.
 
 Any data analysis for TA-A_13 should ideally be mostly automated to establish

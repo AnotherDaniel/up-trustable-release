@@ -10,7 +10,7 @@ reviewed: IBw0gFVAHBf4UUW4Gvr1u5qPIpwJBsX0A5WY7_ZuTWc=
 
 **Guidance**
 
-Our overall objective is to deliver releases of XYZ that meet our
+Our overall objective is to deliver releases of uProtocol that meet our
 expectations and do not cause harm. By collecting and assessing evidence for
 all of the factors above, we aim to assess (ideally measure) confidence in
 each release candidate, to support go/nogo decision-making, In assessing

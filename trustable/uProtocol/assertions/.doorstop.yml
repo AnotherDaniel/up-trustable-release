@@ -1,0 +1,14 @@
+settings:
+  digits: 3
+  itemformat: markdown
+  parent: TT
+  prefix: up-TA
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "uProtocol Trustable Assertions"
+      name: "uProtocol Trustable Assertions (up-TA)"
+      ref: "up-TA"
+  publish:
+    - report

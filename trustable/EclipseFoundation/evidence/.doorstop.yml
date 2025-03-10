@@ -1,0 +1,14 @@
+settings:
+  digits: 3
+  itemformat: markdown
+  parent: ef-TA
+  prefix: ef-TE
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "Eclipse Foundation Trustable Evidence"
+      name: "Eclipse Foundation Trustable Evidence (ef-TE)"
+      ref: "ef-TE"
+  publish:
+    - report

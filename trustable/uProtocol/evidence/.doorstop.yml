@@ -1,14 +1,14 @@
 settings:
   digits: 3
   itemformat: markdown
-  parent: up-TA
-  prefix: up-TE
+  parent: up_TA
+  prefix: up_TE
   sep: '-'
 attributes:
   defaults:
     doc:
       title: "uProtocol Trustable Evidence"
-      name: "uProtocol Trustable Evidence (up-TE)"
-      ref: "up-TE"
+      name: "uProtocol Trustable Evidence (up_TE)"
+      ref: "up_TE"
   publish:
     - report

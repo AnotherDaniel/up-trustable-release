@@ -1,0 +1,14 @@
+settings:
+  digits: 3
+  itemformat: markdown
+  parent: up_TA
+  prefix: up-rust_TE
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "up-rust Trustable Evidence"
+      name: "up-rust Trustable Evidence (up-rust_TE)"
+      ref: "up-rust_TE"
+  publish:
+    - report

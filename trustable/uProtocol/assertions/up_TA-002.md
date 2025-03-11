@@ -10,7 +10,7 @@ links:
 - TA-A_02: af45xWv3CiZv7p3pn8eqVroHsHwLr5dU4YMsL-iulzk=
 normative: true
 ref: ''
-reviewed: vgaUlGS9Aoh1r6iiqc6wmRUK89AveTGbsIPOJ5DB6E8=
+reviewed: iyyhhwgrn5X762fUlot1yh46AbsxChbGY6s2-Cbta1Y=
 ---
 
 Dependencies (crates) used in uProtocol Rust projects are vetted regarding the aspects:

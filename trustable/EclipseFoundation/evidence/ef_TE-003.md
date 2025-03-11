@@ -1,16 +1,12 @@
 ---
 active: true
 derived: false
-doc:
-  name: Trustable Evidence (TE)
-  ref: TE
-  title: Trustable Evidence
 level: 1.3
 links:
-- ef-TA-003: HsVXPSunpEpcO2z_H2V9B_QMMi0hHZvrCT5JjT_djIU=
+- ef_TA-003: rEA3MpypAqCqyNQyYOO6e1entzmoa0Xrm0aSTOtHvz4=
 normative: true
 ref: ''
-reviewed: MZibLBbXhM2VJ38orIR5AlJ-4IvdMco8sC5NIh0zGew=
+reviewed: 6vgdVxdUYdSHQqzoUIjaHARPFdyCXS9Im8OoSmq7Vt8=
 ---
 
 Any PR for a uProtocol repo requires the Eclipse ECA check to complete successfully before becoming eligible for merging, for example: [up-spec PU #270](https://github.com/eclipse-uprotocol/up-spec/pull/270)

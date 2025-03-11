@@ -5,7 +5,7 @@ level: 1.2.1
 links: []
 normative: false
 ref: ''
-reviewed: uKDaIGuO6RMw7euUfONAcGxxSTCdBvgpsgYmm5XFTBs=
+reviewed: G8jEmnwnmO5wWhY6sxCyx19X2uI9vWanarsGZA5mJrc=
 ---
 
 The goal of this assertion is to ensure that foundational building blocks used by uProtocol are build by live communities, which are

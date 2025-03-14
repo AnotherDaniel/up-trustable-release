@@ -16,8 +16,7 @@ module logging
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
 WORKSPACE_DIR="/up-trustable-release"
-ASSET_LOCATION="${WORKSPACE_DIR}/release-artifacts"
-
+ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
 
 main() {
   mkdir -p ${ASSET_LOCATION}
@@ -33,23 +32,20 @@ main() {
     esac
   done
 
-  # Array to hold all extracted URLs
+  # Array to hold all release component URLs from UP_TSF_COMPONENT_RELASES
   local -a urls=()
-  
-  # Extract URLs into the urls array
   extract_urls_to_array "${UP_TSF_COMPONENT_RELASES:?}" urls
   
   # Debug: print array count and contents
   log_debug "Found ${#urls[@]} URLs:"
+
   for ((i=0; i<${#urls[@]}; i++)); do
     log_debug "URL[${i}]: ${urls[${i}]}"
     
     # Process URL and get JSON
-    json_result=$(process_url "${urls[${i}]}")
-    log_debug "JSON[${i}]: ${json_result}"
-    log_debug "---"
+    component_data=$(process_url "${urls[${i}]}")
     
-    retrieve_manifests "${json_result}"
+    retrieve_manifests "${component_data}"
   done
 
   # Loop through each directory in ASSET_LOCATION and call retrieve_assets
@@ -61,16 +57,15 @@ main() {
   done
 }
 
+# Function to retrieve the manifest file for a component
 retrieve_manifests() {
-  local json_result=$1
-  
-  # Extract URL from JSON result using jq
-  local component=$(echo "${json_result}" | jq -r '.component')
-  local url=$(echo "${json_result}" | jq -r '.url')
+  local component_data=$1 
+  local component=$(echo "${component_data}" | jq -r '.component')
+  local url=$(echo "${component_data}" | jq -r '.url')
   local base_url=${url//tag/download}
   local manifest_url="${base_url}/manifest.toml"
   
-  # Use wget to retrieve the manifest
+  # Create release-artifacts subdirectory for every component and retrieve the manifest
   log_info "Retrieving manifest from: ${manifest_url}"
   mkdir -p "${ASSET_LOCATION}/${component}"
   if ! wget -qP "${ASSET_LOCATION}/${component}" "${manifest_url}"; then
@@ -79,6 +74,7 @@ retrieve_manifests() {
   fi
 }
 
+# Function to retrieve all release assets for a component as referenced in its manifest.toml
 retrieve_assets() {
   local path=$1
   local manifest_file="${path}/manifest.toml"
@@ -88,10 +84,10 @@ retrieve_assets() {
     exit 1
   fi
   
-  # Sections to process
+  # Sections to process - this needs to be extended, and generally reworked alongside quevee
   local sections=("requirements" "readme" "licensing" "testing")
   
-  # Process each section
+  # Process each section, downloading all referenced assets
   for section in "${sections[@]}"; do
     log_info "Processing section: ${section}"
     local url_list=$(toml get ${manifest_file} metadata.${section})
@@ -109,14 +105,15 @@ retrieve_assets() {
   done
 }
 
-# Function to extract URLs from UP_TSF_COMPONENT_RELASES into an array
+# Function to extract URLs into an array
+# URLs are passed in as first argument, array is passed in as second argument
+# URL argument format is ['https://url.a', 'https://url.b', ...]
 extract_urls_to_array() {
   log_debug "Extracting URLs from: $1"
 
-  local -n url_array=$2  # Reference to the array passed as parameter
+  local -n url_array=$2 
   
   # Remove the brackets and split by commas
-  # shellcheck disable=SC2154
   local raw_values=$(echo "$1" | sed 's/^\[//;s/\]$//')
   
   # Use IFS to split the values
@@ -124,20 +121,17 @@ extract_urls_to_array() {
   local raw_urls=(${raw_values})
   unset IFS
     
-  # Process each URL
   for ((i=0; i<${#raw_urls[@]}; i++)); do
-    # Remove the quotes if present
     local clean_url=${raw_urls[${i}]//[\"\']/}
     clean_url=$(echo "${clean_url}" | xargs)  # Trim whitespace        
     url_array[i]="${clean_url}"
   done
 }
 
-# Function to process a single URL and return a JSON string
+# Function to process a single URL and return its components as a JSON string
 process_url() {
   local url=$1
   
-  # Extract components
   local repo=$(echo "${url}" | sed -E 's|https://github.com/(.+)/releases/tag/(.+)|\1|')
   local project=$(echo "${repo}" | cut -d'/' -f1)
   local component=$(echo "${repo}" | cut -d'/' -f2)
@@ -152,6 +146,5 @@ process_url() {
     --arg tag "${tag}" \
     '{url: $url, repository: $repo, project: $project, component: $component, tag: $tag}')
   
-  # Return the JSON string
   echo "${json_string}"
 }

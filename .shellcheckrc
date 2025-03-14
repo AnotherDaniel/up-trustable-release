@@ -5,6 +5,7 @@ disable=SC2148
 disable=SC2086
 disable=SC2206
 disable=SC2248
+disable=SC2155
 
 # Suggest ${VAR} in place of $VAR
 enable=require-variable-braces

@@ -15,24 +15,55 @@
 module logging
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
-LOG_TIMESTAMP=${LOG_TIMESTAMP:-"on"}
+LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}
 
 WORKSPACE_DIR="/up-trustable-release"
 ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
 
-main() {
-  mkdir -p ${ASSET_LOCATION}
+print_help() {
+  echo "Usage: $0 [options]"
+  echo "Options:"
+  echo "  -v                Increase verbosity level"
+  echo "  -t                Enable logging timestamps"
+  echo "  -w <directory>    Set the workspace directory"
+  echo "  --help            Display this help message"
+}
 
-  # Parse command line arguments
-  while getopts "v" opt; do
+main() {
+ # Parse command line arguments
+  while getopts "vtw:-:" opt; do
     case ${opt} in
       v)
         ((CURRENT_LOG_LEVEL++))
         ;;
+      t)
+        LOG_TIMESTAMP="on"
+        ;;
+      w)
+        WORKSPACE_DIR="${OPTARG}"
+        ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
+        ;;
+      -)
+        case "${OPTARG}" in
+          help)
+            print_help
+            exit 0
+            ;;
+          *)
+            echo "Invalid option: --${OPTARG}" >&2
+            print_help
+            exit 1
+            ;;
+        esac
+        ;;
       *)
+        print_help
+        exit 1
         ;;
     esac
   done
+
+  mkdir -p ${ASSET_LOCATION}
 
   # Array to hold all release component URLs from UP_TSF_COMPONENT_RELASES
   local -a urls=()
@@ -70,7 +101,7 @@ retrieve_manifests() {
   # Create release-artifacts subdirectory for every component and retrieve the manifest
   log_info "Retrieving manifest from: ${manifest_url}"
   mkdir -p "${ASSET_LOCATION}/${component}"
-  if ! wget -qP "${ASSET_LOCATION}/${component}" "${manifest_url}"; then
+  if ! wget -q -O "${ASSET_LOCATION}/${component}/manifest.toml" "${manifest_url}"; then
     log_error "Failed to retrieve manifest from: ${manifest_url}"
     rm -rf "${ASSET_LOCATION:?}/${component}"
   fi
@@ -101,7 +132,8 @@ retrieve_assets() {
     log_debug "Found ${#asset_urls[@]} assets in section: ${section}"
     for ((i=0; i<${#asset_urls[@]}; i++)); do
       log_debug "Downloading asset[${i}]: ${asset_urls[${i}]}"
-      mkdir -p "${path}/${section}"
+      # For now, we fail the script if an asset section already exists - could add '-p' to ignore, but need to think of a global strategy for dealing with non-empty asset directories
+      mkdir "${path}/${section}"
       wget -qP "${path}/${section}" "${asset_urls[${i}]}"
     done
   done

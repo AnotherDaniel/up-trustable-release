@@ -124,6 +124,7 @@ extract_urls_to_array() {
   for ((i=0; i<${#raw_urls[@]}; i++)); do
     local clean_url=${raw_urls[${i}]//[\"\']/}
     clean_url=$(echo "${clean_url}" | xargs)  # Trim whitespace        
+    # shellcheck disable=SC2034
     url_array[i]="${clean_url}"
   done
 }

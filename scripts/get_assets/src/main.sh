@@ -1,3 +1,17 @@
+# Copyright (C) 2025 ETAS 
+# 
+# This program and the accompanying materials are made available under the
+# terms of the Apache License, Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0.
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+# 
+# SPDX-License-Identifier: Apache-2.0
+
 module logging
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
@@ -23,7 +37,7 @@ main() {
   local -a urls=()
   
   # Extract URLs into the urls array
-  extract_urls_to_array urls
+  extract_urls_to_array "${UP_TSF_COMPONENT_RELASES:?}" urls
   
   # Debug: print array count and contents
   log_debug "Found ${#urls[@]} URLs:"
@@ -37,56 +51,86 @@ main() {
     
     retrieve_manifests "${json_result}"
   done
+
+  # Loop through each directory in ASSET_LOCATION and call retrieve_assets
+  for dir in "${ASSET_LOCATION}"/*/; do
+    if [[ -d "${dir}" ]]; then
+      log_info "Processing assets in directory: ${dir}"
+      retrieve_assets "${dir}"
+    fi
+  done
 }
 
 retrieve_manifests() {
-local json_result=$1
+  local json_result=$1
   
   # Extract URL from JSON result using jq
-  local url=$(echo "${json_result}" | jq -r '.url')
   local component=$(echo "${json_result}" | jq -r '.component')
+  local url=$(echo "${json_result}" | jq -r '.url')
+  local base_url=${url//tag/download}
+  local manifest_url="${base_url}/manifest.toml"
   
-  # Construct the manifest URL
-  local manifest_url="${url}/manifest.toml"
-  
-  # Use curl to retrieve the manifest
+  # Use wget to retrieve the manifest
   log_info "Retrieving manifest from: ${manifest_url}"
   mkdir -p "${ASSET_LOCATION}/${component}"
-  # curl -O "${manifest_url}" > "${ASSET_LOCATION}/${component}/manifest.toml"
+  if ! wget -qP "${ASSET_LOCATION}/${component}" "${manifest_url}"; then
+    log_error "Failed to retrieve manifest from: ${manifest_url}"
+    rm -rf "${ASSET_LOCATION:?}/${component}"
+  fi
 }
- 
+
+retrieve_assets() {
+  local path=$1
+  local manifest_file="${path}/manifest.toml"
+  
+  if [[ ! -f "${manifest_file}" ]]; then
+    log_error "Manifest file not found: ${manifest_file}"
+    exit 1
+  fi
+  
+  # Sections to process
+  local sections=("requirements" "readme" "licensing" "testing")
+  
+  # Process each section
+  for section in "${sections[@]}"; do
+    log_info "Processing section: ${section}"
+    local url_list=$(toml get ${manifest_file} metadata.${section})
+    local -a asset_urls=()
+
+    extract_urls_to_array "${url_list}" asset_urls
+
+    # Debug: print array count and contents
+    log_debug "Found ${#asset_urls[@]} assets in section: ${section}"
+    for ((i=0; i<${#asset_urls[@]}; i++)); do
+      log_debug "Downloading asset[${i}]: ${asset_urls[${i}]}"
+      mkdir -p "${path}/${section}"
+      wget -qP "${path}/${section}" "${asset_urls[${i}]}"
+    done
+  done
+}
+
 # Function to extract URLs from UP_TSF_COMPONENT_RELASES into an array
 extract_urls_to_array() {
-  local -n url_array=$1  # Reference to the array passed as parameter
+  log_debug "Extracting URLs from: $1"
+
+  local -n url_array=$2  # Reference to the array passed as parameter
   
   # Remove the brackets and split by commas
   # shellcheck disable=SC2154
-  local raw_values=$(echo "${UP_TSF_COMPONENT_RELASES}" | sed 's/^\[//;s/\]$//')
+  local raw_values=$(echo "$1" | sed 's/^\[//;s/\]$//')
   
-  # Use more reliable IFS to split the values
+  # Use IFS to split the values
   local IFS=','
   local raw_urls=(${raw_values})
-  
-  # Reset IFS
   unset IFS
-  
-  # Debug
-  log_debug "Found ${#raw_urls[@]} raw URLs"
-  
+    
   # Process each URL
   for ((i=0; i<${#raw_urls[@]}; i++)); do
     # Remove the quotes if present
     local clean_url=${raw_urls[${i}]//[\"\']/}
-    clean_url=$(echo "${clean_url}" | xargs)  # Trim whitespace
-    
-    log_debug "Clean URL: '${clean_url}'"
-    
-    # Add to the array
-    url_array[${i}]="${clean_url}"
+    clean_url=$(echo "${clean_url}" | xargs)  # Trim whitespace        
+    url_array[i]="${clean_url}"
   done
-  
-  # Debug - verify array was populated
-  log_debug "URL array now has ${#url_array[@]} elements"
 }
 
 # Function to process a single URL and return a JSON string

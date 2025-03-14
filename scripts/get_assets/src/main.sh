@@ -15,6 +15,8 @@
 module logging
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
+LOG_TIMESTAMP=${LOG_TIMESTAMP:-"on"}
+
 WORKSPACE_DIR="/up-trustable-release"
 ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
 

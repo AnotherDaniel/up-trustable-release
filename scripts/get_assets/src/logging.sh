@@ -24,27 +24,37 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+get_timestamp() {
+  # shellcheck disable=SC2154
+  if [[ "${LOG_TIMESTAMP}" == "on" ]]; then  
+    echo "$(date '+%Y-%m-%d %H:%M:%S') "
+  else
+    echo ""
+  fi
+}
+
 # Logging functions
 log_error() {
+  # shellcheck disable=SC2154
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_ERROR} ]]; then
-    echo -e "${RED}[ERROR]${NC} $*" >&2
+    echo -e "${RED}[ERROR]${NC} $(get_timestamp)$*" >&2
   fi
 }
 
 log_warn() {
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_WARN} ]]; then
-    echo -e "${YELLOW}[WARN]${NC} $*" >&2
+    echo -e "${YELLOW}[WARN]${NC}  $(get_timestamp)$*" >&2
   fi
 }
 
 log_info() {
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_INFO} ]]; then
-    echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') $*"
+    echo "[INFO]  $(get_timestamp)$*"
   fi
 }
 
 log_debug() {
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_DEBUG} ]]; then
-    echo -e "${BLUE}[DEBUG]${NC} $*"
+    echo -e "${BLUE}[DEBUG]${NC} $(get_timestamp)$*"
   fi
 }

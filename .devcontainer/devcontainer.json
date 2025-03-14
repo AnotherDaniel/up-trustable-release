@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/rust
+{
+    "name": "uProtocol Trustable Release",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--privileged"
+    ],
+    // This is a workaround which is again necessary on MacOS 14.0, it looks like this bug is back:
+    // https://github.com/microsoft/vscode-dev-containers/issues/1487#issuecomment-1143907307
+    "mounts": [
+        "source=rust-volume,target=/rust-volume,type=volume"
+    ],
+    //    "postCreateCommand": "sudo .devcontainer/post-create.sh",
+    "customizations": {
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "lldb.executable": "/usr/bin/lldb",
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "asciidoctor.asciidoctor-vscode",
+                "bianxianyang.htmlplay",
+                "bierner.markdown-mermaid",
+                "bierner.markdown-preview-github-styles",
+                "davidanson.vscode-markdownlint",
+                "hediet.vscode-drawio",
+                "linusu.auto-dark-mode",
+                "mhutchie.git-graph",
+                "streetsidesoftware.code-spell-checker",
+                "tamasfe.even-better-toml",
+                "timonwong.shellcheck",
+                "vadimcn.vscode-lldb",
+                "yzhang.markdown-all-in-one",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/up-trustable-release/,type=bind",
+    "workspaceFolder": "/up-trustable-release/",
+    "remoteUser": "vscode"
+}

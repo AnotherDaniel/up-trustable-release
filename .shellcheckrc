@@ -1,0 +1,16 @@
+# Disable 'missing shebang' warning because we're using mush
+disable=SC2148
+
+# Disable because this is annoying
+disable=SC2086
+disable=SC2206
+disable=SC2248
+
+# Suggest ${VAR} in place of $VAR
+enable=require-variable-braces
+
+# Turn on warnings for unquoted variables with safe values
+enable=quote-safe-variables
+
+# Turn on warnings for unassigned uppercase variables
+enable=check-unassigned-uppercase

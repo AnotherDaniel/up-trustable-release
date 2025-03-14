@@ -1,7 +1,0 @@
-[submodule "up-spec"]
-	path = up-spec
-	url = https://github.com/eclipse-uprotocol/up-spec.git
-[submodule "up-rust"]
-	path = up-rust
-	url = https://github.com/eclipse-uprotocol/up-rust.git
-	branch = 1.6.0-alpha.4_changes

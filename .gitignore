@@ -1,3 +1,7 @@
+# Obnoxious python stuff
 __pycache__/
 .venv/
 *.whl
+
+# Any data that we pull from other github releases
+release_artifacts/

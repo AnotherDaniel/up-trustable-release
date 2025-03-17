@@ -1,7 +1,4 @@
-# Disable 'missing shebang' warning because we're using mush
-disable=SC2148
-
-# Disable because this is annoying
+# Disable because these are annoying
 disable=SC2086
 disable=SC2206
 disable=SC2248

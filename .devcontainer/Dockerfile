@@ -45,8 +45,8 @@ RUN wget -P /tmp https://gitlab.com/api/v4/projects/66600816/packages/generic/tr
 RUN pip3 install legacy-cgi 
 RUN pip3 install /tmp/${TRUSTABLE_RELEASE}
 
-# Install mush
-RUN curl get.javanile.org/mush | sh
+# Install mush - or not for now; the idea is brilliant but the project is languishing somewhat and doesn't seem to get much adoption
+# RUN curl get.javanile.org/mush | sh
 
 # Install toml-cli - to be replaced by json parsing (jq) in the future
 RUN wget -P /tmp https://github.com/gnprice/toml-cli/releases/download/v0.2.3/${TOML_CLI}

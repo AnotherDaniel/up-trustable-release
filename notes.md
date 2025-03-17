@@ -14,3 +14,7 @@
 ## up-rust release URL example
 
 https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.5.0
+
+## TODO
+
+- behavior if output directory/files already present - force switch, etc

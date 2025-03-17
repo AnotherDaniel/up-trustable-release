@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright (C) 2025 ETAS 
 # 
 # This program and the accompanying materials are made available under the

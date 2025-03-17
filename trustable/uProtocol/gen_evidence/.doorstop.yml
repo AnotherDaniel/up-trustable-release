@@ -1,0 +1,14 @@
+settings:
+  digits: 3
+  itemformat: markdown
+  parent: TT
+  prefix: up_gen_TE
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "uProtocol Trustable Evidence (generated)"
+      name: "uProtocol Trustable Evidence (up_gen_TE)"
+      ref: "up_gen_TE"
+  publish:
+    - report

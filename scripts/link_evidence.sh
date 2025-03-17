@@ -1,0 +1,224 @@
+#!/bin/bash
+
+# Copyright (C) 2025 ETAS 
+# 
+# This program and the accompanying materials are made available under the
+# terms of the Apache License, Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0.
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+# 
+# SPDX-License-Identifier: Apache-2.0
+
+# shellcheck source=logging.sh
+source logging.sh
+source asset_types.sh
+
+CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
+LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}
+
+WORKSPACE_DIR="/up-trustable-release"
+ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
+ASSERTION_TEMPLATES="${WORKSPACE_DIR}/trustable/uProtocol/templates_assertion"
+ASSERTION_LOCATION="${WORKSPACE_DIR}/trustable/uProtocol/gen_assertions"
+EVIDENCE_TEMPLATES="${WORKSPACE_DIR}/trustable/uProtocol/templates_evidence"
+EVIDENCE_LOCATION="${WORKSPACE_DIR}/trustable/uProtocol/gen_evidence"
+
+print_help() {
+  echo "Usage: $0 [options]"
+  echo "Options:"
+  echo "  -v                Increase verbosity level"
+  echo "  -t                Enable logging timestamps"
+  echo "  -w <directory>    Set the workspace directory"
+  echo "  --cleanup         Clean up assertion and evidence locations"
+  echo "  --help            Display this help message"
+}
+
+main() {
+  # Parse command line arguments
+  while getopts "vtw:-:" opt; do
+    case ${opt} in
+      v)
+        ((CURRENT_LOG_LEVEL++))
+        ;;
+      t)
+        LOG_TIMESTAMP="on"
+        ;;
+      w)
+        WORKSPACE_DIR="${OPTARG}"
+        ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
+        ;;
+      -)
+        case "${OPTARG}" in
+          help)
+            print_help
+            exit 0
+            ;;
+          cleanup)
+            cleanup
+            exit 0
+            ;;
+          *)
+            echo "Invalid option: --${OPTARG}" >&2
+            print_help
+            exit 1
+            ;;
+        esac
+        ;;
+      *)
+        print_help
+        exit 1
+        ;;
+    esac
+  done
+
+  # Check if doorstop binary is available
+  if ! command -v doorstop &> /dev/null; then
+    log_error "doorstop binary could not be found. Exiting."
+    exit 1
+  fi
+
+  # Check if ASSET_LOCATION exists
+  if [[ ! -d "${ASSET_LOCATION}" ]]; then
+    log_error "ASSET_LOCATION does not exist: ${ASSET_LOCATION}. Exiting."
+    exit 1
+  fi
+
+  # Loop through each subdirectory in ASSET_LOCATION and process
+  for dir in "${ASSET_LOCATION}"/*/; do
+    if [[ -d "${dir}" ]]; then
+      log_info "Processing subdirectory: ${dir}"
+      process_assetdir "${dir}"
+    fi
+  done
+}
+
+cleanup() {
+  log_info "Cleaning up assertion and evidence locations"
+  # Ensure that doorstop metadata is not deleted during cleanup
+  find "${ASSERTION_LOCATION}" -mindepth 1 ! -name '.doorstop.yml' -delete
+  find "${EVIDENCE_LOCATION}" -mindepth 1 ! -name '.doorstop.yml' -delete
+  log_info "Cleanup completed"
+}
+
+process_assetdir() {
+  local subdir_path=$1
+  log_info "Processing subdirectory: ${subdir_path}"
+
+  # Iterate over each subdirectory in subdir_path
+  for subdir in "${subdir_path}"/*/; do
+    if [[ -d "${subdir}" ]]; then
+      local dir_name=$(basename "${subdir}")
+      log_info "Found asset type: ${dir_name}"
+
+      # Compare directory name to the list of strings
+      for name in "${ASSET_TYPES[@]}"; do
+        if [[ "${dir_name}" == "${name}" ]]; then
+
+          case "${dir_name}" in
+            "licensing")
+              link_licensing "${subdir}"
+              ;;
+            "readme")
+              link_readme "${subdir}"
+              ;;
+            "requirements")
+              link_requirements "${subdir}"
+              ;;
+            "testing")
+              link_testing "${subdir}"
+              ;;
+          esac
+        fi
+      done
+    fi
+  done
+
+}
+
+set_active() {
+  local file_basename=$1
+
+  local source_file="${ASSERTION_TEMPLATES}/${file_basename}.md"
+  local destination_file="${ASSERTION_LOCATION}/${file_basename}.md"
+
+  if [[ ! -f "${source_file}" ]]; then
+    log_error "Source file does not exist: ${source_file}"
+    return 1
+  fi
+
+  cp "${source_file}" "${destination_file}"
+  log_info "Copied ${source_file} to ${destination_file}"
+}
+
+link_evidence() {
+  local parent_statement=$1
+  local full_path_filename=$2
+
+  local output
+  output=$(doorstop add up_gen_TE 2>&1)
+
+  if [[ $? -ne 0 ]]; then
+    log_error "Failed to add evidence: ${output}"
+    return 1
+  fi
+
+  local filename
+  filename=$(echo "${output}" | grep -oE '@/[^ ]+\.md' | sed 's|@||')
+
+  if [[ -z "${filename}" ]]; then
+    log_error "Failed to extract filename from doorstop output: ${output}"
+    return 1
+  fi
+
+  local template_file="${EVIDENCE_TEMPLATES}/${parent_statement}.md"
+  if [[ ! -f "${template_file}" ]]; then
+    log_error "Template file does not exist: ${template_file}"
+    return 1
+  fi
+
+  local template_content
+  template_content=$(<"${template_file}")
+  template_content="${template_content//\$EVIDENCE/${full_path_filename}}"
+
+  echo "${template_content}" >> "${WORKSPACE_DIR}/${filename}"
+  log_info "Appended template content to ${filename}"
+}
+
+link_licensing() {
+  local licensing_dir=$1
+  log_info "Processing licensing directory: ${licensing_dir}"
+
+  if [[ -f "${licensing_dir}/licenses.html" ]]; then
+    log_info "Found licenses.html in ${licensing_dir}"
+    set_active "up_gen_TA-001" true
+
+    link_evidence TA-A_02 "${licensing_dir}/licenses.html"
+  fi
+
+
+}
+
+link_readme() {
+    local readme_dir=$1
+    log_info "Linking readme directory: ${readme_dir}"
+    # Add your logic here
+}
+
+link_requirements() {
+    local requirements_dir=$1
+    log_info "Linking requirements directory: ${requirements_dir}"
+    # Add your logic here
+}
+
+link_testing() {
+    local testing_dir=$1
+    log_info "Linking testing directory: ${testing_dir}"
+    # Add your logic here
+}
+
+main "$@"

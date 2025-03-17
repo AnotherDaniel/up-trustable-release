@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright (C) 2025 ETAS 
 # 
 # This program and the accompanying materials are made available under the
@@ -12,7 +14,9 @@
 # 
 # SPDX-License-Identifier: Apache-2.0
 
-module logging
+# shellcheck source=logging.sh
+source logging.sh
+source asset_types.sh
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
 LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}
@@ -26,6 +30,7 @@ print_help() {
   echo "  -v                Increase verbosity level"
   echo "  -t                Enable logging timestamps"
   echo "  -w <directory>    Set the workspace directory"
+  echo "  --cleanup         Clean up asset location"
   echo "  --help            Display this help message"
 }
 
@@ -47,6 +52,10 @@ main() {
         case "${OPTARG}" in
           help)
             print_help
+            exit 0
+            ;;
+          cleanup)
+            cleanup
             exit 0
             ;;
           *)
@@ -90,6 +99,12 @@ main() {
   done
 }
 
+cleanup() {
+  log_info "Cleaning up asset location"
+  rm -rf "${ASSET_LOCATION:?}"/*
+  log_info "Cleanup completed"
+}
+
 # Function to retrieve the manifest file for a component
 retrieve_manifests() {
   local component_data=$1 
@@ -116,12 +131,9 @@ retrieve_assets() {
     log_error "Manifest file not found: ${manifest_file}"
     exit 1
   fi
-  
-  # Sections to process - this needs to be extended, and generally reworked alongside quevee
-  local sections=("requirements" "readme" "licensing" "testing")
-  
+    
   # Process each section, downloading all referenced assets
-  for section in "${sections[@]}"; do
+  for section in "${ASSET_TYPES[@]}"; do
     log_info "Processing section: ${section}"
     local url_list=$(toml get ${manifest_file} metadata.${section})
     local -a asset_urls=()
@@ -132,8 +144,7 @@ retrieve_assets() {
     log_debug "Found ${#asset_urls[@]} assets in section: ${section}"
     for ((i=0; i<${#asset_urls[@]}; i++)); do
       log_debug "Downloading asset[${i}]: ${asset_urls[${i}]}"
-      # For now, we fail the script if an asset section already exists - could add '-p' to ignore, but need to think of a global strategy for dealing with non-empty asset directories
-      mkdir "${path}/${section}"
+      mkdir -p "${path}/${section}"
       wget -qP "${path}/${section}" "${asset_urls[${i}]}"
     done
   done
@@ -183,3 +194,5 @@ process_url() {
   
   echo "${json_string}"
 }
+
+main "$@"

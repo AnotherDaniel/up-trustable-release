@@ -8,3 +8,6 @@ __pycache__/
 
 # Any data that we pull from other github releases
 release_artifacts/
+
+# Any data that we generate
+trustable/*/gen_*/*

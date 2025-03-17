@@ -15,8 +15,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # shellcheck source=logging.sh
-source logging.sh
-source asset_types.sh
+source lib/logging.sh
+source lib/asset_types.sh
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
 LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}

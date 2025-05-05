@@ -1,48 +1,49 @@
 #!/bin/bash
 
-# Copyright (C) 2025 ETAS 
+# Copyright (C) 2025 Eclipse Foundation and others. 
 # 
 # This program and the accompanying materials are made available under the
-# terms of the Apache License, Version 2.0 which is available at
-# https://www.apache.org/licenses/LICENSE-2.0.
+# terms of the Eclipse Public License v. 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
 # 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
-# 
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: 2025 Eclipse Foundation
+# SPDX-License-Identifier: EPL-2.0
 
 # shellcheck source=logging.sh
 source lib/logging.sh
 source lib/asset_types.sh
 
-CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
-LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}
-
 WORKSPACE_DIR="/up-trustable-release"
+
+ASSET_DOWNLOAD=${ASSET_DOWNLOAD:-"true"}
 ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
+CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
+LOG_TIMESTAMP=${LOG_TIMESTAMP:-"false"}
 
 print_help() {
   echo "Usage: $0 [options]"
   echo "Options:"
-  echo "  -v                Increase verbosity level"
-  echo "  -t                Enable logging timestamps"
-  echo "  -w <directory>    Set the workspace directory"
-  echo "  --cleanup         Clean up asset location"
-  echo "  --help            Display this help message"
+  echo "  -n, --no-download  Do not download release assets"  
+  echo "  -t                 Enable logging timestamps"
+  echo "  -v                 Increase verbosity level"
+  echo "  -w <directory>     Set the workspace directory"
+  echo "  --cleanup          Clean up component manifest data"
+  echo "  --help             Display this help message"
 }
 
 main() {
  # Parse command line arguments
-  while getopts "vtw:-:" opt; do
+  while getopts "ntvw:-:" opt; do
     case ${opt} in
-      v)
-        ((CURRENT_LOG_LEVEL++))
+      n)
+        ASSET_DOWNLOAD="false"
         ;;
       t)
-        LOG_TIMESTAMP="on"
+        LOG_TIMESTAMP="true"
+        ;;
+      v)
+        ((CURRENT_LOG_LEVEL++))
         ;;
       w)
         WORKSPACE_DIR="${OPTARG}"
@@ -50,12 +51,15 @@ main() {
         ;;
       -)
         case "${OPTARG}" in
-          help)
-            print_help
-            exit 0
-            ;;
           cleanup)
             cleanup
+            exit 0
+            ;;
+          no-download)
+            ASSET_DOWNLOAD="false"
+            ;;
+          help)
+            print_help
             exit 0
             ;;
           *)
@@ -71,6 +75,12 @@ main() {
         ;;
     esac
   done
+
+  # Check if gh binary is available
+  if ! command -v gh &> /dev/null; then
+    log_error "gh binary could not be found. Exiting."
+    exit 1
+  fi
 
   mkdir -p ${ASSET_LOCATION}
 
@@ -90,63 +100,56 @@ main() {
     retrieve_manifests "${component_data}"
   done
 
-  # Loop through each directory in ASSET_LOCATION and call retrieve_assets
-  for dir in "${ASSET_LOCATION}"/*/; do
-    if [[ -d "${dir}" ]]; then
-      log_info "Processing assets in directory: ${dir}"
-      retrieve_assets "${dir}"
-    fi
-  done
-}
-
-cleanup() {
-  log_info "Cleaning up asset location"
-  rm -rf "${ASSET_LOCATION:?}"/*
-  log_info "Cleanup completed"
+  if [[ "${ASSET_DOWNLOAD}" == "true" ]]; then  
+    # Loop through each directory in ASSET_LOCATION and call retrieve_assets
+    for dir in "${ASSET_LOCATION}"/*/; do
+      if [[ -d "${dir}" ]]; then
+        log_info "Processing assets in directory: ${dir}"
+        retrieve_assets "${dir}"
+      fi
+    done
+  fi
 }
 
 # Function to retrieve the manifest file for a component
 retrieve_manifests() {
   local component_data=$1 
+  local repository=$(echo "${component_data}" | jq -r '.repository')  
   local component=$(echo "${component_data}" | jq -r '.component')
   local url=$(echo "${component_data}" | jq -r '.url')
-  local base_url=${url//tag/download}
-  local manifest_url="${base_url}/manifest.toml"
   
   # Create release-artifacts subdirectory for every component and retrieve the manifest
-  log_info "Retrieving manifest from: ${manifest_url}"
+  log_info "Retrieving manifest from: ${url}"
+
   mkdir -p "${ASSET_LOCATION}/${component}"
-  if ! wget -q -O "${ASSET_LOCATION}/${component}/manifest.toml" "${manifest_url}"; then
-    log_error "Failed to retrieve manifest from: ${manifest_url}"
+  if ! gh release download --repo ${repository} --pattern '*.tsffer' --dir "${ASSET_LOCATION}/${component}"; then
+    log_error "Failed to download tsffer manifests from: ${url}"
     rm -rf "${ASSET_LOCATION:?}/${component}"
   fi
 }
 
-# Function to retrieve all release assets for a component as referenced in its manifest.toml
+# Function to retrieve all release assets for a component as referenced in downloaded .tsffer manifests
 retrieve_assets() {
   local path=$1
-  local manifest_file="${path}/manifest.toml"
-  
-  if [[ ! -f "${manifest_file}" ]]; then
-    log_error "Manifest file not found: ${manifest_file}"
-    exit 1
-  fi
-    
-  # Process each section, downloading all referenced assets
-  for section in "${ASSET_TYPES[@]}"; do
-    log_info "Processing section: ${section}"
-    local url_list=$(toml get ${manifest_file} metadata.${section})
-    local -a asset_urls=()
 
-    extract_urls_to_array "${url_list}" asset_urls
+  find "${path}" -type f -name "*.tsffer" | while read -r tsffer_file; do
+    log_info "Processing tsffer file: ${tsffer_file}"
 
-    # Debug: print array count and contents
-    log_debug "Found ${#asset_urls[@]} assets in section: ${section}"
-    for ((i=0; i<${#asset_urls[@]}; i++)); do
-      log_debug "Downloading asset[${i}]: ${asset_urls[${i}]}"
-      mkdir -p "${path}/${section}"
-      wget -qP "${path}/${section}" "${asset_urls[${i}]}"
-    done
+    # Extract information from the .tsffer file
+    local download_url
+    download_url=$(jq -r '.["asset-info"]["download-url"]' "${tsffer_file}")
+    local name
+    name=$(jq -r '.["asset-info"]["name"]' "${tsffer_file}")
+
+    # Log the extracted information
+    log_info "Download URL: ${download_url} for asset name: ${name}"
+
+    # Download the asset using the extracted URL
+    if [[ -n "${download_url}" && -n "${name}" ]]; then
+      curl --no-progress-meter -L -o "${path}/${name}" "${download_url}" || log_error "Failed to download ${name} from ${download_url}"
+    else
+      log_error "Invalid tsffer file: ${tsffer_file}"
+    fi
   done
 }
 
@@ -177,22 +180,29 @@ extract_urls_to_array() {
 # Function to process a single URL and return its components as a JSON string
 process_url() {
   local url=$1
-  
-  local repo=$(echo "${url}" | sed -E 's|https://github.com/(.+)/releases/tag/(.+)|\1|')
-  local project=$(echo "${repo}" | cut -d'/' -f1)
-  local component=$(echo "${repo}" | cut -d'/' -f2)
+  local hostname=$(echo "${url}" | awk -F/ '{print $3}')
+  local repository=$(echo "${url}" | sed -E 's|https://github.com/(.+)/releases/tag/(.+)|\1|')
+  local project=$(echo "${repository}" | cut -d'/' -f1)
+  local component=$(echo "${repository}" | cut -d'/' -f2)
   local tag=$(echo "${url}" | sed -E 's|https://github.com/(.+)/releases/tag/(.+)|\2|')
   
   # Create JSON string using jq
   local json_string=$(jq -n \
     --arg url "${url}" \
-    --arg repo "${repo}" \
+    --arg hostname "${hostname}" \
+    --arg repository "${repository}" \
     --arg project "${project}" \
     --arg component "${component}" \
     --arg tag "${tag}" \
-    '{url: $url, repository: $repo, project: $project, component: $component, tag: $tag}')
+    '{url: $url, hostname: $hostname, repository: $repository, project: $project, component: $component, tag: $tag}')
   
   echo "${json_string}"
+}
+
+cleanup() {
+  log_info "Cleaning up component manifest data"
+  find "${ASSET_LOCATION}" -mindepth 1 -delete
+  log_info "Cleanup completed"
 }
 
 main "$@"

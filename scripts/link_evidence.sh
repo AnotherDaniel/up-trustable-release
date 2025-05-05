@@ -1,21 +1,19 @@
 #!/bin/bash
 
-# Copyright (C) 2025 ETAS 
+# Copyright (C) 2025 Eclipse Foundation and others. 
 # 
 # This program and the accompanying materials are made available under the
-# terms of the Apache License, Version 2.0 which is available at
-# https://www.apache.org/licenses/LICENSE-2.0.
+# terms of the Eclipse Public License v. 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
 # 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
-# 
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: 2025 Eclipse Foundation
+# SPDX-License-Identifier: EPL-2.0
 
-# shellcheck source=logging.sh
+
+# shellcheck source=lib/logging.sh
 source lib/logging.sh
+# shellcheck source=lib/asset_types.sh
 source lib/asset_types.sh
 
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
@@ -33,8 +31,8 @@ EVIDENCE_LOCATION="${WORKSPACE_DIR}/trustable/uProtocol/gen_evidence"
 print_help() {
   echo "Usage: $0 [options]"
   echo "Options:"
-  echo "  -v                Increase verbosity level"
   echo "  -t                Enable logging timestamps"
+  echo "  -v                Increase verbosity level"
   echo "  -w <directory>    Set the workspace directory"
   echo "  --cleanup         Clean up assertion and evidence locations"
   echo "  --help            Display this help message"
@@ -44,11 +42,11 @@ main() {
   # Parse command line arguments
   while getopts "vtw:-:" opt; do
     case ${opt} in
-      v)
-        ((CURRENT_LOG_LEVEL++))
-        ;;
       t)
         LOG_TIMESTAMP="on"
+        ;;
+      v)
+        ((CURRENT_LOG_LEVEL++))
         ;;
       w)
         WORKSPACE_DIR="${OPTARG}"
@@ -56,12 +54,12 @@ main() {
         ;;
       -)
         case "${OPTARG}" in
-          help)
-            print_help
-            exit 0
-            ;;
           cleanup)
             cleanup
+            exit 0
+            ;;
+          help)
+            print_help
             exit 0
             ;;
           *)
@@ -112,8 +110,9 @@ process_assetdir() {
   log_info "Processing subdirectory: ${subdir_path}"
 
   # Extract the last component of the path
-  COMPONENT=$(basename "${subdir_path}")
-  log_info "Component: ${COMPONENT}"
+  local component
+  component=$(basename "${subdir_path}")
+  log_info "Component: ${component}"
 
   # Iterate over each subdirectory in subdir_path
   for subdir in "${subdir_path}"/*/; do
@@ -122,21 +121,22 @@ process_assetdir() {
       log_info "Found asset type: ${dir_name}"
 
       # Compare directory name to the list of strings
+      # shellcheck disable=SC2154 #(defined in asset_types.sh)
       for name in "${ASSET_TYPES[@]}"; do
         if [[ "${dir_name}" == "${name}" ]]; then
 
           case "${dir_name}" in
             "licensing")
-              link_licensing "${COMPONENT}" "${subdir}"
+              link_licensing "${component}" "${subdir}"
               ;;
             "readme")
-              link_readme "${subdir}"
+              link_readme "${component}" "${subdir}"
               ;;
             "requirements")
-              link_requirements "${subdir}"
+              link_requirements "${component}" "${subdir}"
               ;;
             "testing")
-              link_testing "${subdir}"
+              link_testing "${component}" "${subdir}"
               ;;
           esac
         fi
@@ -145,9 +145,12 @@ process_assetdir() {
   done
 }
 
+# 'Activate' the specified assertion template
+# $1: file_basename
+# Example: set_active "up_gen_TA-001"
+# This will copy the template file to the assertion location
 set_active() {
   local file_basename=$1
-
   local source_file="${ASSERTION_TEMPLATES}/${file_basename}.md"
   local destination_file="${ASSERTION_LOCATION}/${file_basename}.md"
 
@@ -224,21 +227,24 @@ link_licensing() {
 }
 
 link_readme() {
-    local readme_dir=$1
-    log_info "Linking readme directory: ${readme_dir}"
-    # Add your logic here
+  local component=$1
+  local readme_dir=$1
+  log_info "Linking readme directory: ${readme_dir}"
+  # Add your logic here
 }
 
 link_requirements() {
-    local requirements_dir=$1
-    log_info "Linking requirements directory: ${requirements_dir}"
-    # Add your logic here
+  local component=$1
+  local requirements_dir=$1
+  log_info "Linking requirements directory: ${requirements_dir}"
+  # Add your logic here
 }
 
 link_testing() {
-    local testing_dir=$1
-    log_info "Linking testing directory: ${testing_dir}"
-    # Add your logic here
+  local component=$1
+  local testing_dir=$1
+  log_info "Linking testing directory: ${testing_dir}"
+  # Add your logic here
 }
 
 main "$@"

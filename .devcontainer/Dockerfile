@@ -1,14 +1,13 @@
 ################################################################################
-# Copyright (c) 2023 Contributors to the Eclipse Foundation
-#
-# See the NOTICE file(s) distributed with this work for additional
-# information regarding copyright ownership.
-#
+# Copyright (C) 2025 Eclipse Foundation and others. 
+# 
 # This program and the accompanying materials are made available under the
-# terms of the Apache License Version 2.0 which is available at
-# https://www.apache.org/licenses/LICENSE-2.0
-#
-# SPDX-License-Identifier: Apache-2.0
+# terms of the Eclipse Public License v. 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+# 
+# SPDX-FileType: SOURCE
+# SPDX-FileCopyrightText: 2025 Eclipse Foundation
+# SPDX-License-Identifier: EPL-2.0
 ################################################################################
 
 FROM mcr.microsoft.com/devcontainers/base:dev-ubuntu
@@ -28,6 +27,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     zip \
     && \
     rm -rf /var/lib/apt/lists/*
+
+# Install gh binary
+RUN (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
+    && sudo mkdir -p -m 755 /etc/apt/keyrings \
+    && out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+    && cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+    && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+    && sudo apt update \
+    && sudo apt install gh -y
 
 # Before installing cargo tools, change to the user that will be used in the container later.
 # The reason is that cargo creates some cache, etc. folders with the correct group rustlang, but 

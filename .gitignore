@@ -1,4 +1,5 @@
 # Misc
+.env
 .DS_Store
 
 # Python stuff

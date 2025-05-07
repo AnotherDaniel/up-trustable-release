@@ -27,15 +27,16 @@
                 "bierner.markdown-mermaid",
                 "bierner.markdown-preview-github-styles",
                 "davidanson.vscode-markdownlint",
+                "gxl.git-graph-3",
                 "hediet.vscode-drawio",
                 "linusu.auto-dark-mode",
                 "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
                 "streetsidesoftware.code-spell-checker",
                 "tamasfe.even-better-toml",
                 "timonwong.shellcheck",
                 "vadimcn.vscode-lldb",
-                "yzhang.markdown-all-in-one",
-                "ms-azuretools.vscode-docker"
+                "yzhang.markdown-all-in-one"
             ]
         }
     },

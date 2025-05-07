@@ -12,7 +12,6 @@
 
 # shellcheck source=logging.sh
 source lib/logging.sh
-source lib/asset_types.sh
 
 WORKSPACE_DIR="/up-trustable-release"
 
@@ -24,7 +23,7 @@ LOG_TIMESTAMP=${LOG_TIMESTAMP:-"false"}
 print_help() {
   echo "Usage: $0 [options]"
   echo "Options:"
-  echo "  -n, --no-download  Do not download release assets"  
+  echo "  -n, --no-download  Do not download actual release assets (only download tsffer manifests)"  
   echo "  -t                 Enable logging timestamps"
   echo "  -v                 Increase verbosity level"
   echo "  -w <directory>     Set the workspace directory"
@@ -145,8 +144,8 @@ retrieve_assets() {
     log_info "Download URL: ${download_url} for asset name: ${name}"
 
     # Download the asset using the extracted URL
-    if [[ -n "${download_url}" && -n "${name}" ]]; then
-      curl --no-progress-meter -L -o "${path}/${name}" "${download_url}" || log_error "Failed to download ${name} from ${download_url}"
+    if [[ -n "${download_url}" ]]; then
+      curl --no-progress-meter -LO --output-dir "${path}" "${download_url}" || log_error "Failed to download ${download_url}"
     else
       log_error "Invalid tsffer file: ${tsffer_file}"
     fi

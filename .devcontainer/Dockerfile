@@ -14,7 +14,6 @@ FROM mcr.microsoft.com/devcontainers/base:dev-ubuntu
 ARG USERNAME=vscode
 ARG WORKDIR=/up-trustable-release
 ARG TRUSTABLE_RELEASE="trustable-2025.2.18-py3-none-any.whl"
-ARG TOML_CLI="toml-0.2.3-x86_64-linux.tar.gz"
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install \
@@ -53,11 +52,3 @@ ENV PATH=/venv/bin:$PATH
 RUN wget -P /tmp https://gitlab.com/api/v4/projects/66600816/packages/generic/trustable/v2025.02.18/${TRUSTABLE_RELEASE}
 RUN pip3 install legacy-cgi 
 RUN pip3 install /tmp/${TRUSTABLE_RELEASE}
-
-# Install mush - or not for now; the idea is brilliant but the project is languishing somewhat and doesn't seem to get much adoption
-# RUN curl get.javanile.org/mush | sh
-
-# Install toml-cli - to be replaced by json parsing (jq) in the future
-RUN wget -P /tmp https://github.com/gnprice/toml-cli/releases/download/v0.2.3/${TOML_CLI}
-RUN tar xvfz /tmp/${TOML_CLI} -C /tmp 
-RUN sudo find /tmp/ -name 'toml' -exec mv {} /usr/local/bin/ \;

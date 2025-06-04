@@ -110,24 +110,25 @@ main() {
   fi
 }
 
-# Function to retrieve the manifest file for a component
+# Function to retrieve the manifest file for a component (will overwrite existing files)
 retrieve_manifests() {
   local component_data=$1 
   local repository=$(echo "${component_data}" | jq -r '.repository')  
   local component=$(echo "${component_data}" | jq -r '.component')
   local url=$(echo "${component_data}" | jq -r '.url')
-  
+  local tag=$(echo "${component_data}" | jq -r '.tag')
+
   # Create release-artifacts subdirectory for every component and retrieve the manifest
-  log_info "Retrieving manifest from: ${url}"
+  log_info "Retrieving manifest from: ${repository}, release/tag: ${tag}"
 
   mkdir -p "${ASSET_LOCATION}/${component}"
-  if ! gh release download --repo ${repository} --pattern '*.tsffer' --dir "${ASSET_LOCATION}/${component}"; then
+  if ! gh release download ${tag} --clobber --repo ${repository} --pattern '*.tsffer' --dir "${ASSET_LOCATION}/${component}"; then
     log_error "Failed to download tsffer manifests from: ${url}"
     rm -rf "${ASSET_LOCATION:?}/${component}"
   fi
 }
 
-# Function to retrieve all release assets for a component as referenced in downloaded .tsffer manifests
+# Function to retrieve all release assets for a component as referenced in downloaded .tsffer manifests (will overwrite existing files)
 retrieve_assets() {
   local path=$1
 

@@ -7,8 +7,8 @@ settings:
 attributes:
   defaults:
     doc:
-      title: "Eclipse Foundation Trustable Evidence"
-      name: "Eclipse Foundation Trustable Evidence (ef_TE)"
+      title: "Eclipse Foundation-related Trustable Evidence"
+      name: "Eclipse Foundation-related Trustable Evidence (ef_TE)"
       ref: "ef_TE"
   publish:
     - report

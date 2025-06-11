@@ -8,6 +8,12 @@ The goal of the work around Trustable and the uProtocol project is to leave cons
 
 Since uProtocol alone is insufficient to construct a safe, or indeed a Trustable, system, we place plenty of expectations on the integrator of this project. These will be detailed such that a consumer of uProtocol knows what extra constraints to place on their work.
 
+## Notes
+
+TODO
+
+- replace XYZ with uProtocol (Rust components)
+
 ## Approach
 
 Until and unless Trustable release the tooling necessary to present structured materials in a way which is consumable by open-source downstreams of uProtocol, we shall document our Trustability via this text file. Once the above is resolved we will use whatever content formats are appropriate to enable automated validation of trustability.

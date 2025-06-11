@@ -18,7 +18,6 @@ LOG_TIMESTAMP=${LOG_TIMESTAMP:-"off"}
 WORKSPACE_DIR="/up-trustable-release"
 ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
 
-ASSERTION_LOCATION="${WORKSPACE_DIR}/trustable/uProtocol/gen_assertions"
 EVIDENCE_LOCATION="${WORKSPACE_DIR}/trustable/uProtocol/gen_evidence"
 
 print_help() {
@@ -93,7 +92,6 @@ main() {
 cleanup() {
   log_info "Cleaning up assertion and evidence locations"
   # Ensure that doorstop metadata is not deleted during cleanup
-  find "${ASSERTION_LOCATION}" -mindepth 1 ! -name '.doorstop.yml' -delete
   find "${EVIDENCE_LOCATION}" -mindepth 1 ! -name '.doorstop.yml' -delete
   log_info "Cleanup completed"
 }

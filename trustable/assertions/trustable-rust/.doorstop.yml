@@ -1,0 +1,14 @@
+settings:
+  digits: 2
+  itemformat: markdown
+  parent: TT
+  prefix: rst_TA
+  sep: '-'
+attributes:
+  defaults:
+    doc:
+      title: "Rust-related Trustable Assertions"
+      name: "Rust-related Trustable Assertions (rst_TA)"
+      ref: "rst_TA"
+  publish:
+    - report

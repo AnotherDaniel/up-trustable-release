@@ -1,5 +1,5 @@
 settings:
-  digits: 3
+  digits: 2
   itemformat: markdown
   parent: TT
   prefix: ef_TA
@@ -7,8 +7,8 @@ settings:
 attributes:
   defaults:
     doc:
-      title: "Eclipse Foundation Trustable Assertions"
-      name: "Eclipse Foundation Trustable Assertions (ef_TA)"
+      title: "Eclipse Foundation-related Trustable Assertions"
+      name: "Eclipse Foundation-related Trustable Assertions (ef_TA)"
       ref: "ef_TA"
   publish:
     - report

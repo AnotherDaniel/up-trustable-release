@@ -154,33 +154,3 @@ Here our use of a forge such as GitHub will assist. We can define our testing ob
 > Collected data from tests and monitoring of deployed software is analysed according to specified objectives.
 
 Effectively the same as TA-14 in terms of what we need to do to get there, and then perhaps some more recommendations for how our integrating systems can analyse outputs.
-
-### TA-16
-
-> All constructed iterations of uProtocol Rust components include source code, build instructions, tests, results and attestations.
-
-This is, to a first approximation, automatically met by means of the tagging of releases which therefore contain everything in the repository at that time. We will need to ensure therefore that results/attestations are documented inside the repository content at the time of release, and that the release process includes validating this.
-
-### TA-17
-
-> ?
-
-TODO
-
-### TA-18
-
-> Confidence in uProtocol Rust components is measured based on results of analysis
-
-Nothing structural to do here - this is an aggregation of confidence scores from everything else we do in the trustable framework, and the documentation of how to arrive at such a result.
-
-### TA-19
-
-> Components and tools used to construct and verify uProtocol Rust components are assessed, to identify potential risks and issues
-
-This will require us to think about how our containers are constructed and to assess risks around them. In addition we should provide guidance to our integrators so that they are able to assess the equivalent in their build/test environments.
-
-### TA-20
-
-> Manual methodologies applied for uProtocol (Rust components) by contributors, and their results, are managed according to specified objectives.
-
-We must ensure we avoid any manual testing of uProtocol Rust components expected as part of our release cycles. Right now we do not have any such tests, and we should keep it that way.

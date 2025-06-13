@@ -73,92 +73,99 @@ This is, quite likely, the only tenet where realistically all we can do is provi
 
 Trustable provides a series of assertions to support the tenets. Each of these will need treatment, however for now we may not be able to, or may have to defer it to our integrators.
 
-### TA-1
+### TA-SUPPLY_CHAIN
+
+> All sources for uProtocol (Rust components) and tools are mirrored in our controlled environment
+
+This is not something that uProtocol itself is responsible for - instead we ensure that we document everything necessary for an integrating system to meet this assertion, such as documenting our expectations on the build environment and locking our dependencies via Cargo.lock et al.
+Should we want to turn up the compliance level for this assertion, archiving the `target/` folders of our component builds should go some way towwards meeting this demand, as that will provide a mirror of all the dependency sources that were used for the build. Better approaches might exist, and can be iterated towards over time.
+
+### TA-INPUTS
+
+> Components and tools used to construct and verify uProtocol Rust components are assessed, to identify potential risks and issues
+
+This is not explicitly within the current remit of uProtocol as an open source project. However, where the Rust components of the project are concerned, there exist options for sourcing ASIL certified compilers, which are functionally (code-level) identical to the regular upstream copmilers used by uProtocol. So a switch to a certified tool version might be an option for an integrator to help support this statement.
+
+### TA-RELEASES
+
+> Construction of uProtocol (Rust components) releases is fully repeatable and the results are fully reproducible, with any exceptions documented and justified.
+
+Again, this is something where we can provide assistance and documentation, but we cannot actually provide evidence for directly as we are not in control of our integrating systems. Should we want to turn up the compliance level for this assertion, archiving the `target/` folders of our component builds should go some way towwards meeting this demand, as that will provide a mirror of all the dependency sources that were used for the build. Better approaches might exist, and can be iterated towards over time.
+
+### TA-TESTS
+
+> All tests for uProtocol (Rust components), and its build and test environments, are constructed from controlled/mirrored sources and are reproducible, with any exceptions documented
+
+Control is plausible to some extent, however for normal FOSS methodologies (for example, test build pipelines that run on system images provided by GitHub infrastructure) this will not really be possible - As such we will instead aim to provide full documentation of the expectations we place on an integrator to meet this instead; ensuring that nothing we do in our processes would preclude the meeting of this assertion for such downstreams.
+
+### TA-ITERATIONS
+
+> All constructed iterations of uProtocol (Rust components) include source code, build instructions, tests, results and attestations.
+
+For uProtocol, this is best addresed by a fully automated release-build process, which performs all and any test and documentation building steps, and includes the results with the release artifacts.
+
+### TA-FIXES
 
 > Known bugs or misbehaviours are analysed and triaged, and critical fixes or mitigations are implemented or applied.
 
 The evidence which Trustable recommends to support this assertion will generally be artifacts of the release process which we will need to implement; such as detailing the issues dealt with in a release, the issues not yet dealt with, etc.
 
-### TA-2
+### TA-UPDATES
+
+> uProtocol Rust components, configurations and tools are updated under specified change and configuration management controls.
+
+This is primarily on an integration project, which needs to show explicit management of used tool and code versions. For the scope of uProtocol (Rust components), all versions of dependencies are explicitly managed by the established Rust mechanisms and are part of the version-controlled repository content. Currently, uProtocol (Rust components) does not explicitly manage the version of the Rust toolchain used in regular builds and relases, instead we use the latest stable version of the toolchain as available in the latest Ubuntu CI images provided within the GitHub infrastructure. This could be changed to using fixed versions at any time when such a change is deemed useful, which it currently isn't.
+
+### TA-BEHAVIOURS
 
 > Expected or required behaviours for uProtocol are identified, specified, verified and validated based on analysis.
 
-Documenting the expected behaviours within our Trustable materials and/or requirements documentation will be necessary here. Every test we run ought to be clear as to _why_ it exists and what it is demonstrating. Where possible, negative assertion tests (ie. checking that things fail when they should) is also appropriate to have. We will endeavour to have a test suite which can be used by the integrating system to subsequently validate behaviour over time).
+Documenting the expected behaviours within our Trustable materials and/or requirements documentation will be necessary here. Every test we run ought to be clear as to _why_ it exists and what it is demonstrating. Where possible, negative assertion tests (ie. checking that things fail when they should) is also appropriate to have. We will endeavour to have a test suite which can be used by the integrating system to subsequently validate behaviour over time.
 
-### TA-3
+### TA-MISBEHAVIOURS
 
 > Prohibited misbehaviours for uProtocol (Rust components) are identified, and mitigations are specified, verified and validated based on analysis.
 
-Documentation of expectation here will happen like for TA-2, similarly tests where possible should demonstrate that either prohibited behaviours do not occur, or that mitigating actions resolve things when they do. It's likely much of this will, similarly to TA-2, require integrating systems to perform validation.
+Documentation of expectation here will happen like for TA-BEHAVIOURS, similarly tests where possible should demonstrate that either prohibited behaviours do not occur, or that mitigating actions resolve things when they do. It's likely much of this will, similarly to TA-BEHAVIOURS, require integrating systems to perform validation.
 
-### TA-4
+### TA-INDICATORS
 
 > Advance warning indicators for misbehaviours are identified, and monitoring mechanisms are specified, verified and validated based on analysis.
 
-uProtocol is communication infrastructure a system-of-systems. As such, component-specific advance warning indicators are hard to provide since misbehaviour is likely involving communication between different components and/or systems. There is a onus on uProtocol to have a mechanism of telemetry and fault analysis which supports to understand communication performance and related warning indicators.
+uProtocol is communication infrastructure for a system-of-systems. As such, component-specific advance warning indicators are hard to provide since misbehaviour is likely involving communication between different components and/or systems. There is an onus on uProtocol to have a mechanism of telemetry and fault analysis which supports to understand communication performance and related warning indicators.
 
-### TA-5
+### TA-CONSTRAINTS
 
-> All constructed iterations of uProtocol (Rust components) include source code, build instructions, tests, results and attestations.
+> Constraints on adaptation and deployment of uProtocol are specified.
 
-TODO
+Documenting the constraints and assumptions of use of uProtocol within our Trustable materials and/or requirements documentation will be necessary here.
 
-### TA-6
-
-> All sources for uProtocol (Rust components) and tools are mirrored in our controlled environment
-
-This is not something that uProtocol itself is responsible for - instead we ensure that we document everything necessary for an integrating system to meet this assertion, such as documenting our expectations on the build environment and locking our dependencies via Cargo.lock et al.
-
-### TA-7
-
-> uProtocol Rust components, configurations and tools are updated under specified change and configuration management controls.
-
-TODO
-
-### TA-8
-
-> Expected or required behaviours for uProtocol Rust components are identified, specified, verified and validated based on analysis.
-
-TODO
-
-### TA-9
-
-> Prohibited misbehaviours for uProtocol Rust components are identified, and mitigations are specified, verified and validated based on analysis.
-
-TODO
-
-### TA-10
-
-> uProtocol (Rust components) releases are constructed from controlled or mirrored sources, and are fully reproducible.
-
-Again, this is something where we can provide assistance and documentation, but we cannot actually provide evidence for directly as we are not in control of our integrating systems.
-
-### TA-11
-
-> uProtocol Rust components, configurations and tools are updated under specified change and configuration management controls.
-
-Documenting our use of GitHub is likely sufficient here, with some expectations placed on the integrating system that they do not defeat such. We will also potentially need to increase the evidences joined with a release to ensure that our downstream integrators are able to achieve this.
-
-### TA-12
-
-> All tests for uProtocol (Rust components), and its build and test environments, are constructed from controlled or mirrored sources.
-
-Control is plausible to some extent, however for normal FOSS methodologies this will not really be possible - As such we will instead aim to provide full documentation of the expectations we place on an integrator to meet this instead; ensuring that nothing we do in our processes would preclude the meeting of this assertion for such downstreams.
-
-### TA-13
+### TA-VALIDATION
 
 > All specified tests are executed repeatedly, under defined conditions in controlled environments, according to specified objectives.
 
-The repeated testing aspect of trusting uProtocol Rust components will be two-pronged. We will set up a regular CI job which can then be used to collect evidence of very basic soak testing by means of running and re-running any test suites which are part of uProtocol directly. However the majority of evidence for this assertion will likely come from the integrating system performing some level of system soak test on a uProtocol service mesh.
+The repeated testing aspect of trusting uProtocol Rust components is two-pronged: We use merge- and release-triggered CI jobs which are used to collect evidence of basic unit and component-level testing by means of running and re-running any test suites which are part of uProtocol directly. However the majority of evidence for this assertion will likely come from the integrating system performing some level of system soak test on a uProtocol service mesh.
 
-### TA-14
+### TA-DATA
 
 > Data is collected from tests, and from monitoring of deployed software, according to specified objectives.
 
 Here our use of a forge such as GitHub will assist. We can define our testing objectives purely around success of the suites, and then use the pipeline results as a way to gather evidence that we're meeting the desired outcomes. As for deployed software monitoring, we will need to provide recommendations on how to do this.
 
-### TA-15
+### TA-ANALYSIS
 
 > Collected data from tests and monitoring of deployed software is analysed according to specified objectives.
 
-Effectively the same as TA-14 in terms of what we need to do to get there, and then perhaps some more recommendations for how our integrating systems can analyse outputs.
+Effectively the same as TA-DATA in terms of what we need to do to get there, and then perhaps some more recommendations for how our integrating systems can analyse outputs.
+
+### TA-METHODOLOGIES
+
+> Manual methodologies applied for uProtocol (Rust components) by contributors, and their results, are managed according to specified objectives.
+
+There are and will be no manual processes involved in building, testing or releasing uProtocol components. Where such manual processes are applied as part of a system integration effort, they will have do be documented and managed in that scope.
+
+### TA-CONFIDENCE
+
+> Confidence in uProtocol (Rust components) is measured based on results of analysis
+
+The uProtocol project does not apply additional or separate analysis methods other than TSF and the tooling that comes with it. As soon as we modify/change score weightings or other methodical aspects of the framework, this needs to be documented appropriately and referenced in this section.

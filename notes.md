@@ -29,3 +29,8 @@ https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.5.0
       - [utest->dsn~cloudevents-umessage-mapping~2]
 
 - behavior if output directory/files already present - force switch, etc
+
+## devcontainer
+
+- install trudag
+- install graphviz

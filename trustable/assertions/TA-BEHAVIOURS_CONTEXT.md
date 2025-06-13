@@ -1,38 +1,26 @@
 ---
-active: true
-derived: false
 level: 1.8.1
-links: []
 normative: false
-ref: ''
-reviewed: NokQ4HosIngB6CbJHeNwNu06VYu93wi-P-DCqzQxSok=
 ---
 
-Although it is practically impossible to specify all of the necessary behaviours
-and required properties for complex software, we must clearly specify the most
-important of these (e.g. where harm could result if given criteria are not met),
-and verify that these are correctly provided by XYZ.
+Although it is practically impossible to specify all of the necessary behaviours and required properties for complex software, we must clearly specify the most
+important of these (e.g. where harm could result if given criteria are not met), and verify that these are correctly provided by XYZ.
 
 **Guidance**
 
 This assertion is satisfied to the extent that we have:
 
-- Determined which Behaviours are critical for consumers of XYZ and recorded
-  them as Expectations.
+- Determined which Behaviours are critical for consumers of XYZ and recorded them as Expectations.
 - Verified these Behaviours are achieved.
 
 Expectations could be verified by:
 
 - Functional testing for the system.
 - Functional soak testing for the system.
-- Specifying architecture and verifying its implementation with pre-merge
-  integration testing for components.
-- Specifying components and verifying their implementation using pre-merge unit
-  testing.
+- Specifying architecture and verifying its implementation with pre-merge integration testing for components.
+- Specifying components and verifying their implementation using pre-merge unit testing.
 
-The number and combination of the above verification strategies will depend on
-the scale of the project. For example, unit testing is more suitable for the
-development of a small library than of an OS.
+The number and combination of the above verification strategies will depend on the scale of the project. For example, unit testing is more suitable for the development of a small library than of an OS.
 
 **Evidence**
 
@@ -40,10 +28,7 @@ development of a small library than of an OS.
 
 **Confidence scoring**
 
-Confidence scoring for TA-BEHAVIOURS is based on our confidence that the list of
-Expectations is accurate and complete, that Expectations are verified by tests,
-and that the effectiveness of these tests is validated by appropriate
-strategies.
+Confidence scoring for TA-BEHAVIOURS is based on our confidence that the list of Expectations is accurate and complete, that Expectations are verified by tests, and that the effectiveness of these tests is validated by appropriate strategies.
 
 **Checklist**
 

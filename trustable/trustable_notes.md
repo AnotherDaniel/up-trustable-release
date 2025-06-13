@@ -8,11 +8,11 @@ The goal of the work around Trustable and the uProtocol project is to leave cons
 
 Since uProtocol alone is insufficient to construct a safe, or indeed a Trustable, system, we place plenty of expectations on the integrator of this project. These will be detailed such that a consumer of uProtocol knows what extra constraints to place on their work.
 
-## Notes
+## General Note
 
-TODO
+In any TSF related documents of text snippets, the letters `XYZ` are meant to denote the project TSF is being applied to; to avoid unnecessary changes to this upstream content, we've left the `XYZ` placeholders in place, and ask the reader/reviewer to mentally replace them with `uProtocol (Rust components)`.
 
-- replace XYZ with uProtocol (Rust components)
+This project by it's nature is working off and with the [`Trustable Software Framework` (TSF)](https://gitlab.com/CodethinkLabs/trustable/trustable), specifically we are using the tools provided by that project and we are referencing and currenty copy-including the Trustable Tenets and Assertions published by that project, which is licensed under `CC-BY-SA-4.0`. Any contents included in this repository that is taken from TSF is made available under that same license (`CC-BY-SA-4.0`).
 
 ## Approach
 
@@ -23,7 +23,7 @@ Until and unless Trustable release the tooling necessary to present structured m
 ## Tenets - The high level
 
 Trustability is, in some sense, about the aggregation of evidence to support an aggregation of assertions, which chain upwards to an assertion of trustability. The
-Trustable project defines a number of such assertions as the start of the process, and to guide projects into a well defined approach - these are the Trustable Tenets.
+[Trustable project](https://gitlab.com/CodethinkLabs/trustable/trustable/) defines a number of such assertions as the start of the process, and to guide projects into a well defined approach - these are the Trustable Tenets.
 
 We shall address each Tenet in turn, and for each, we will begin to list out what will be necessary in order that we can start to make assertions of our own.
 
@@ -33,13 +33,15 @@ We shall address each Tenet in turn, and for each, we will begin to list out wha
 
 In order to meet this, we shall have to ensure that we document all our issues, link merge requests to those issues, and store tests and test results for releases, such that they can be identified and replicated.
 
-The use of Git, Gitlab, etc. can provide much of thi.
+The use of GitHub, Gitlab, etc. can provide much of this.
 
 ### Tenet - Construction
 
 > Tools are provided to build uProtocol (Rust components) from trusted sources (also provided) with full reproducibility.
 
-Meeting this directly ourselves will be difficult as we will be acting as a traditional FOSS project which is using container based builds which consume operating systems not necessarily meeting these requirements. We will have to consider at least locking down the SHAs of the containers used to build releases, though making any kind of guarantee about the reproducibility of such containers will be near-impossible.
+Meeting this directly ourselves will be difficult as we will be acting as a traditional FOSS project, using container based builds in our CI pipeline which consume operating systems not necessarily meeting these requirements. We will have to consider at least locking down the SHAs of the containers used to build releases, though making any kind of guarantee about the reproducibility of such containers will be near-impossible.
+
+On the other hand, the full transitive set of dependencies (Rust crates) that comprise our build is pulled from crates.ui with pinned versions, so can be replicated on that level. In addition, it might become relevant to archive all sourced used during build (ie. the contents of the component's `./target` folder) alongside a release, so that this exact same set of code is available for later reproduction.
 
 Some amount of expectation that our consumers deal with this aspect is likely to be required.
 
@@ -47,13 +49,13 @@ Some amount of expectation that our consumers deal with this aspect is likely to
 
 > uProtocol Rust components are actively maintained, with regular updates to dependencies, and changes are verified to prevent regressions.
 
-In part this will come from the continued handling of issues and functionality requests, and subsequent releases of the Safety Monitor project. In terms of verification of changes to prevent regressions, our evidence there will be via the various test suites and CI jobs we have at hand, and some expectation that our consumers will be running verifications of the outcome of integrating uProtocol into their projects.
+In part this will come from the continued handling of issues and functionality requests, and subsequent releases of the uProtocol project. In terms of verification of changes to prevent regressions, our evidence there will be via the various test suites and CI jobs we have at hand, and some expectation that our consumers will be running verifications of the outcome of integrating uProtocol into their projects.
 
 ### Tenet - Expectations
 
 > Documentation is provided, specifying what uProtocol is expected to do, and what it must not do, and how this is verified.
 
-This will be in part documentation on the uProtocol side about functionality and behaviour of the software, along with the CI testing mentioned above, but also will be partly expectations on our consumers with respect to how to verify that the integrated uProtocol Rust components are behaving as needed within their system.
+This will be in part specification on the uProtocol side about functionality and behaviour of the software, along with the CI testing mentioned above, but also will be partly expectations on our consumers with respect to how to verify that the integrated uProtocol Rust components are behaving as needed within their system.
 
 ### Tenet - Results
 

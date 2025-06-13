@@ -1,38 +1,19 @@
 ---
-active: true
-derived: false
 level: 1.2.1
-links: []
 normative: false
-ref: ''
-reviewed: 9ESdxD0PPa0OjeNZj_1bZM37__XOMCJ7DzkuxbbL5UY=
 ---
 
 **Guidance**
 
-To satisfy this assertion, the components and tools used to construct and verify
-XYZ releases need to be identified and assessed, to identify available sources
-of evidence about these dependencies.
+To satisfy this assertion, the components and tools used to construct and verify XYZ releases need to be identified and assessed, to identify available sources of evidence about these dependencies.
 
-For components, we need to consider how their potential misbehaviours might
-impact our expectations for XYZ, identify sources of information (e.g. bug
-databases, published CVEs) that can be used to identify known risks or issues,
-and tests that can be used to identify these. These provide the inputs to
-TA-FIXES.
+For components, we need to consider how their potential misbehaviours might impact our expectations for XYZ, identify sources of information (e.g. bug databases, published CVEs) that can be used to identify known risks or issues, and tests that can be used to identify these. These provide the inputs to TA-FIXES.
 
-For the tools we use to construct and verify XYZ, we need to consider how
-their misbehaviour might lead to an unintended change in XYZ, or fail to detect
-misbehaviours of XYZ during testing, or produce incorrect or incomplete data
-that we use when verifying an XYZ release.
+For the tools we use to construct and verify XYZ, we need to consider how their misbehaviour might lead to an unintended change in XYZ, or fail to detect misbehaviours of XYZ during testing, or produce incorrect or incomplete data that we use when verifying an XYZ release.
 
-Where impacts are identified, we need to consider both how serious they might be
-(severity) and whether they would be detected by another tool, test or manual
-check (detectability).
+Where impacts are identified, we need to consider both how serious they might be (severity) and whether they would be detected by another tool, test or manual check (detectability).
 
-For impacts with a high severity and/or low detectability, additional analysis
-should be done to check whether existing tests are effective at detecting the
-misbehaviours or resulting impacts, and new tests or Expectations should be added
-to prevent or detect misbehaviours or impacts that are not currently addressed.
+For impacts with a high severity and/or low detectability, additional analysis should be done to check whether existing tests are effective at detecting the misbehaviours or resulting impacts, and new tests or Expectations should be added to prevent or detect misbehaviours or impacts that are not currently addressed.
 
 **Evidence**
 
@@ -61,9 +42,7 @@ to prevent or detect misbehaviours or impacts that are not currently addressed.
 
 **Confidence scoring**
 
-Confidence scoring for TA-INPUTS is based on the set of components and tools
-identified, how many of (and how often) these have been assessed for their risk
-and impact for XYZ, and the sources of risk and issue data identified.
+Confidence scoring for TA-INPUTS is based on the set of components and tools identified, how many of (and how often) these have been assessed for their risk and impact for XYZ, and the sources of risk and issue data identified.
 
 **Checklist**
 
@@ -71,15 +50,13 @@ and impact for XYZ, and the sources of risk and issue data identified.
 - Are there assessments for all components?
 - Has an assessment been done for the current version of the component?
 - Have sources of bug and/or vulnerability data been identified?
-- Have additional tests and/or Expectations been documented and linked to
-  component assessment?
+- Have additional tests and/or Expectations been documented and linked to component assessment?
 - Are component tests run when integrating new versions of components?
 - Are there tools that are not on the list?
 - Are there impact assessments for all tools?
 - Have tools with high impact been qualified?
 - Were assessments or reviews done for the current tool versions?
-- Have additional tests and/or Expectations been documented and linked to
-  tool assessments?
+- Have additional tests and/or Expectations been documented and linked to tool assessments?
 - Are tool tests run when integrating new versions of tools?
 - Are tool and component tests included in release preparation?
 - Can patches be applied, and then upstreamed for long-term maintenance?

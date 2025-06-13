@@ -1,24 +1,13 @@
 ---
-active: true
-derived: false
 level: 1.15.1
-links: []
 normative: false
-ref: ''
-reviewed: oaiAw_0kmoEFxDQIvl3loWpcE7rJnu46_fjPpSfLIRc=
 ---
 
 **Guidance**
 
-To satisfy this assertion, the manual processes applied in the verification of
-XYZ must be documented, together with the methodologies used, the results of
-applying these processes to specific aspects and iterations of XYZ or its
-components, and evidence that they have been reviewed using documented criteria.
+To satisfy this assertion, the manual processes applied in the verification of XYZ must be documented, together with the methodologies used, the results of applying these processes to specific aspects and iterations of XYZ or its components, and evidence that they have been reviewed using documented criteria.
 
-Any data analysis for TA-ANALYSIS should ideally be mostly automated to establish
-continuous feedback mechanisms. However, specifically, manual processes - such
-as those used for quality control assurances and the appropriate assignment of
-responsibilities - must be documented as evidence for TA-METHODOLOGIES.
+Any data analysis for TA-ANALYSIS should ideally be mostly automated to establish continuous feedback mechanisms. However, specifically, manual processes - such as those used for quality control assurances and the appropriate assignment of responsibilities - must be documented as evidence for TA-METHODOLOGIES.
 
 **Evidence**
 
@@ -30,10 +19,7 @@ responsibilities - must be documented as evidence for TA-METHODOLOGIES.
 
 **Confidence scoring**
 
-Confidence scoring for TA-METHODOLOGIES is based on identifying areas of need for
-manual processes, assessing the clarity of proposed processes, analysing the
-results of their implementation, and evaluating the evidence of effectiveness
-in comparison to the analysed results
+Confidence scoring for TA-METHODOLOGIES is based on identifying areas of need for manual processes, assessing the clarity of proposed processes, analysing the results of their implementation, and evaluating the evidence of effectiveness in comparison to the analysed results
 
 **Checklist**
 

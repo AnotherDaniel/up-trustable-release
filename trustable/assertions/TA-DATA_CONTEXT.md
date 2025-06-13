@@ -1,11 +1,6 @@
 ---
-active: true
-derived: false
 level: 1.13.1
-links: []
 normative: false
-ref: ''
-reviewed: j9stHNgDESo6c0moOQNZju3TJmY0lf2aCRJcFuiLU0s=
 ---
 
 **Guidance**

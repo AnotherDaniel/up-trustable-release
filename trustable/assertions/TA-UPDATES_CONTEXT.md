@@ -1,21 +1,13 @@
 ---
-active: true
-derived: false
 level: 1.7.1
-links: []
 normative: false
-ref: ''
-reviewed: hG7jvBHY0F71idJfIP-eNMGob8Nar8JZABT2qzZONnw=
 ---
 
 **Guidance**
 
-This assertion requires that that we have control over all changes to XYZ,
-including changes to the configurations, components and tools we use to build
-it, and the versions of dependencies that we use.
+This assertion requires that that we have control over all changes to XYZ, including changes to the configurations, components and tools we use to build it, and the versions of dependencies that we use.
 
-This means, the trustable controlled process is the only path to production for constructed target
-software.
+This means, the trustable controlled process is the only path to production for constructed target software.
 
 **Evidence**
 
@@ -23,9 +15,7 @@ software.
 
 **Confidence scoring**
 
-Confidence scoring for TA-UPDATES is based on confidence that we have
-control over the changes that we make to XYZ, including its configuration and
-dependencies.
+Confidence scoring for TA-UPDATES is based on confidence that we have control over the changes that we make to XYZ, including its configuration and dependencies.
 
 **Checklist**
 

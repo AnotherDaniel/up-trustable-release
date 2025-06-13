@@ -1,31 +1,20 @@
 ---
-active: true
-derived: false
 level: 1.14.1
-links: []
 normative: false
-ref: ''
-reviewed: zi0jrK7oCADOwQm2DXDURZrxD2UMmCVeiEujhfQbOrI=
 ---
 
 **Guidance**
 
-This assertion is satisfied to the extent that test data, and data collected
-from monitoring of deployed versions of XYZ, has been analysed, and the results
-used to inform the refinement of expectations and risk analysis.
+This assertion is satisfied to the extent that test data, and data collected from monitoring of deployed versions of XYZ, has been analysed, and the results used to inform the refinement of expectations and risk analysis.
 
 The extent of the analysis is with sufficient precision to confirm that:
 
 - all expectations (TA-BEHAVIOURS) are met
 - all misbehaviours (TA-MISBEHAVIOURS) are detected or mitigated
 - all advance warning indicators (TA-INDICATORS) are monitored
-- misbehaviour/failure rates (calculated directly or inferred by statistics) are
-  within acceptable tolerance
+- misbehaviour/failure rates (calculated directly or inferred by statistics) are within acceptable tolerance
 
-Where test results expose misbehaviours not identified in our analysis (TA-ANALYSIS),
-we add the new misbehaviours to our Expectations (TA-BEHAVIOURS and TA-MISBEHAVIOURS). Where
-necessary, as informed by our ongoing confidence evaluation (TA-CONFIDENCE), we improve
-and repeat the analysis (TA-ANALYSIS).
+Where test results expose misbehaviours not identified in our analysis (TA-ANALYSIS), we add the new misbehaviours to our Expectations (TA-BEHAVIOURS and TA-MISBEHAVIOURS). Where necessary, as informed by our ongoing confidence evaluation (TA-CONFIDENCE), we improve and repeat the analysis (TA-ANALYSIS).
 
 **Evidence**
 
@@ -35,8 +24,7 @@ and repeat the analysis (TA-ANALYSIS).
 
 **Confidence scoring**
 
-Confidence scoring for TA-ANALYSIS is based on Key Performance Indicators (KPIs)
-that may indicate problems in development, test, or production
+Confidence scoring for TA-ANALYSIS is based on Key Performance Indicators (KPIs) that may indicate problems in development, test, or production
 
 **CHECKLIST**
 

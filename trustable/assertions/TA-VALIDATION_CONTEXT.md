@@ -1,22 +1,13 @@
 ---
-active: true
-derived: false
 level: 1.12.1
-links: []
 normative: false
-ref: ''
-reviewed: 96Oi3xjGBdx-UWj3WS7LRmBhOkm6JrSXlq0I-iA-FPo=
 ---
 
 **Guidance**
 
-This assertion is satisfied to the extent that all of the tests specified in
-TA-BEHAVIOURS and constructed in TA-TESTS are correctly executed in a controlled
-environment on a defined cadence (e.g. daily) or for each proposed change, and
-on all candidate release builds for XYZ.
+This assertion is satisfied to the extent that all of the tests specified in TA-BEHAVIOURS and constructed in TA-TESTS are correctly executed in a controlled environment on a defined cadence (e.g. daily) or for each proposed change, and on all candidate release builds for XYZ.
 
-Note that correct behaviour of tests may be confirmed using fault induction
-(e.g. by introducing an error or misconfiguration into XYZ).
+Note that correct behaviour of tests may be confirmed using fault induction (e.g. by introducing an error or misconfiguration into XYZ).
 
 **Evidence**
 
@@ -25,8 +16,7 @@ Note that correct behaviour of tests may be confirmed using fault induction
 
 **Confidence scoring**
 
-Confidence scoring for TA-VALIDATION is based on verification that we have
-results for all tests (both pass / fail and performance)
+Confidence scoring for TA-VALIDATION is based on verification that we have results for all tests (both pass / fail and performance)
 
 **Checklist**
 

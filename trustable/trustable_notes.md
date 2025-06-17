@@ -12,7 +12,7 @@ Since uProtocol alone is insufficient to construct a safe, or indeed a Trustable
 
 In any TSF related documents of text snippets, the letters `XYZ` are meant to denote the project TSF is being applied to; to avoid unnecessary changes to this upstream content, we've left the `XYZ` placeholders in place, and ask the reader/reviewer to mentally replace them with `uProtocol (Rust components)`.
 
-This project by it's nature is working off and with the [`Trustable Software Framework` (TSF)](https://gitlab.com/CodethinkLabs/trustable/trustable), specifically we are using the tools provided by that project and we are referencing and currenty copy-including the Trustable Tenets and Assertions published by that project, which is licensed under `CC-BY-SA-4.0`. Any contents included in this repository that is taken from TSF is made available under that same license (`CC-BY-SA-4.0`).
+This project by its nature is working off and with the [`Trustable Software Framework` (TSF)](https://gitlab.com/CodethinkLabs/trustable/trustable). Specifically we are using the tools provided by that project and we are referencing and currenty copy-including the Trustable Tenets and Assertions published by that project, which is licensed under `CC-BY-SA-4.0`. Any contents included in this repository that is taken from TSF is made available under that same license (`CC-BY-SA-4.0`).
 
 ## Approach
 

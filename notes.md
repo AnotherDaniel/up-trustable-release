@@ -1,21 +1,9 @@
 # Various notes and ideas for how to do this
 
-## basically
-
-- get doorstop items created by oft-run (oft_spec, oft_impl, oft_utest)
-  - would be part of the release artifacts, an archive referenced in manifest.toml
-  - would be gotten from release page, extracted to trustable-release worker thing
-  - doorstop reports run, and all zipped up for trustable-release artifacts
-- reference existing oft reports in their entirety (per release, getting via quevee manifest)
-  - workflow that gets a workspace ENV var with the release URL/tag,
-  - retrieves the manifest.toml
-  - extracts the oft report and creates doorstop links to that
-
-## up-rust release URL example
-
-https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.5.0
-
 ## TODO
+
+- tsffer feature: link-as-evidence (in addition to pointing to files)
+- 
 
 - link to specific locations of individual requirements (e.g. link to build CI stuff)
   - have TSF assertion/evidence items prepared manually
@@ -29,6 +17,11 @@ https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.5.0
       - [utest->dsn~cloudevents-umessage-mapping~2]
 
 - behavior if output directory/files already present - force switch, etc
+
+## TSF application
+
+- check.yaml last action -> TA-ITERATIONS
+
 
 ## devcontainer
 

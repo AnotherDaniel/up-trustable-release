@@ -9,6 +9,8 @@ The Rust core tool set includes the test framework plus associated tooling:
 
 Rust's test framework is built directly into the language and toolchain via `cargo test`. Tests are written as regular Rust functions marked with `#[test]`, and the compiler automatically generates a test runner. No external dependencies, configuration files, or separate test frameworks required.
 
+For an example on how to integrate external testing methodologies with the core Rust test framework, look at how the behavior-driven [Gherkin](https://cucumber.io/docs/gherkin/) test framework can be integrated with the Rust test harness using [cucumber-rs](https://cucumber-rs.github.io/cucumber/main/).
+
 **Core Integration Benefits:**
 
 *Zero Setup Friction* - Every Rust project gets testing capability immediately. No decisions about which test framework to choose, how to configure it, or how to integrate it with the build system.

@@ -1,9 +1,9 @@
 ---
-level: 1.1
+level: 2.14.1
 normative: false
 ---
 
-[Eclipse Foundation Project Handbook (section Software Bill of Materials)](https://www.eclipse.org/projects/handbook/#sbom) recommends the following (please refer to the official Eclipse document for definitive and canonical definitions):
+[Eclipse Foundation Project Handbook (section Software Bill of Materials)](https://www.eclipse.org/projects/handbook/#sbom) states that (please refer to the official Eclipse document for definitive and canonical definitions):
 
 ---
 

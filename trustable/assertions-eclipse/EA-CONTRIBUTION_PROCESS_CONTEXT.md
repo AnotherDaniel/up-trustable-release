@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.8.1
 normative: false
 ---
 
@@ -26,4 +26,4 @@ Additionally, the guide should define any project-specific contribution rules, s
 Evidence for compliance might include (but is not limited to):
 
 * File CONTRIBUTING.md or relevant information in README.md exists
-* Guidelines are being followed in PRs
+* Guidelines are being followed in PRs/MRs

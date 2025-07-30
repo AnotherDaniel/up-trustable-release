@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.5.1
 normative: false
 ---
 
@@ -7,7 +7,7 @@ The [Eclipse Foundation Project Handbook (section Project Resources and Services
 
 ---
 
-Eclipse projects must conduct all essential project activities—including source code, documentation, issue tracking, and bug reporting—on publicly accessible Eclipse Foundation infrastructure. This ensures that development is open, transparent, and inclusive. While external services (e.g., GitHub, DockerHub) may be used for auxiliary purposes such as user forums, builds, or container management, they must not replace Eclipse-managed infrastructure for core project resources.
+Eclipse projects must conduct all essential project activities — including source code, documentation, issue tracking, and bug reporting — on publicly accessible Eclipse Foundation infrastructure. This ensures that development is open, transparent, and inclusive. While external services (e.g., GitHub, DockerHub) may be used for auxiliary purposes such as user forums, builds, or container management, they must not replace Eclipse-managed infrastructure for core project resources.
 
 Projects must also follow Eclipse’s key principles:
 

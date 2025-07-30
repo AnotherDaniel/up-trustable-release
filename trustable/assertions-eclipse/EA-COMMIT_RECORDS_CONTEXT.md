@@ -1,14 +1,13 @@
 ---
-level: 1.1
+level: 2.10.1
 normative: false
 ---
-
 
 The [Eclipse Foundation Project Handbook (section Project Resources and Services / Git Commit Records)](https://www.eclipse.org/projects/handbook/#resources-commit) and [Eclipse Foundation Project Handbook (section Community / Issues](https://www.eclipse.org/projects/handbook/#community-issues) states that (please refer to the official Eclipse document for definitive and canonical definitions):
 
 ---
 
-Eclipse Foundation projects must follow strict rules for Git commits to ensure transparency, traceability, and legal compliance.
+Eclipse Foundation projects must follow rules for Git commits to ensure transparency, traceability, and legal compliance.
 
 Key requirements:
 

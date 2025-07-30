@@ -3,7 +3,7 @@ level: 2.0
 normative: false
 ---
 
-The Eclipse Foundation's bylaws and processes provide a foundation for trustable software development:
+The Eclipse Foundation's bylaws and processes provide a foundation for trustable software development. All Eclipse Foundation gouvernance documents can be found at https://www.eclipse.org/org/documents/
 
 **Eclipse Foundation: A Model for Trustable Open Source Governance**
 

@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.11.1
 normative: false
 ---
 
@@ -7,7 +7,7 @@ The [Eclipse Foundation Project Handbook (section Project Resources and Services
 
 ---
 
-Eclipse projects must ensure that community members can build project artifacts from source with reasonable effort, regardless of whether they use the Eclipse Foundation’s Common Build Infrastructure (CBI) or their own build systems. Projects are strongly encouraged to use CBI but are not strictly required to do so.
+Eclipse projects must ensure that community members can build project artifacts from source with reasonable effort, regardless of whether they use the Eclipse Foundation’s Common Build Infrastructure (CBI) or their own build systems. Projects are encouraged to use CBI but are not strictly required to do so.
 
 To support adoption and contributions, projects should maintain a Contributor Guide (typically CONTRIBUTING.md in the repository root). This file must be concise, accessible, and include:
 
@@ -17,7 +17,7 @@ To support adoption and contributions, projects should maintain a Contributor Gu
 * Main communication channel(s)
 * Canonical source repositories
 * Clear build and contribution instructions (e.g., how to submit pull requests)
-* Link to sign the ECA
+* Link to sign the Eclipse Contributor Agreement (ECA)
 
 Optional additions include links to downloads and more detailed contribution documentation. Well-documented build instructions and contribution guidance ensure transparency, reduce barriers for new contributors, and strengthen the project’s community and sustainability.
 
@@ -25,5 +25,5 @@ Optional additions include links to downloads and more detailed contribution doc
 
 Evidence for compliance might include (but is not limited to):
 
-* README.md or CONTRIBUTING.md files in project repositories
+* README.md and CONTRIBUTING.md files in project repositories
 * Developer documentation on project websites

@@ -1,11 +1,9 @@
 ---
-level: 1.2.1
+level: 2.16.1
 normative: false
 ---
 
 The [Eclipse Foundation Security Policy](https://www.eclipse.org/security/policy/) defines how Eclipse Foundation projects deal with reported security issues:
-
-**Eclipse Foundation Security Policy: Professional Vulnerability Management for Enterprise Open Source**
 
 The Eclipse Foundation Security Policy represents a mature, industry-standard approach to vulnerability management that addresses the security concerns enterprises face when adopting open source software. The purpose of the Eclipse Foundation Security Policy is to set forth the general principles under which the Eclipse Foundation manages the reporting, management, discussion, and disclosure of Vulnerabilities discovered in Eclipse software, creating a framework that rivals commercial software vendors in its rigor and transparency.
 

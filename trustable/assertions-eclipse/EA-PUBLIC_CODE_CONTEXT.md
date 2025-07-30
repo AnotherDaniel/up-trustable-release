@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.6.1
 normative: false
 ---
 
@@ -16,7 +16,9 @@ External services may be used for:
 * Container image management (e.g., DockerHub)
 * Examples, presentations, blogs, and social media
 
-However, source code, documentation, and issue tracking must remain on Eclipse-managed infrastructure. Project leads must review the terms of any external service with their PMC and the EMO to ensure compliance with project licenses, the Eclipse IP Policy, and the Eclipse Foundation Development Process.
+Project leads must review the terms of any external service with their PMC and the EMO to ensure compliance with project licenses, the Eclipse IP Policy, and the Eclipse Foundation Development Process.
+
+However, source code, documentation, and issue tracking must live on Eclipse-managed infrastructure.
 
 ---
 

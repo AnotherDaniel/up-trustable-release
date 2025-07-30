@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.12.1
 normative: false
 ---
 
@@ -7,16 +7,7 @@ The [Eclipse Foundation Project Handbook (section Project Resources and Services
 
 ---
 
-Eclipse open source projects must use Eclipse Foundation-provided infrastructure and keep their project metadata accurate and up-to-date. This metadata is critical for governance, legal compliance, and ensuring that project information is consistent and vendor-neutral.
-
-Projects are required to:
-
-* Track all issues in their assigned issue tracker.
-* Maintain source code in Eclipse-managed GitLab or GitHub repositories.
-* Vet all third-party content.
-* Distribute downloads via Eclipse download servers.
-* Conduct committer communications on project dev-lists.
-* Keep all project metadata current.
+Eclipse open source projects must keep their project metadata accurate and up-to-date and ensure that project information is consistent and vendor-neutral. This metadata is critical for software build, distribution, governance and legal compliance.
 
 The Eclipse Foundation supports projects with infrastructure (e.g., Git hosting, CI/CD, artifact signing, mailing lists), security services (e.g., vulnerability reporting, security audits), intellectual property (IP) due diligence, governance support, and promotion resources. Correct project metadata ensures these services are applied properly, supports IP compliance, and enables downstream consumers to rely on accurate legal and technical information.
 

@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.13.1
 normative: false
 ---
 
@@ -7,15 +7,19 @@ The [Eclipse Foundation Development Process section 6.4](https://www.eclipse.org
 
 ---
 
-Projects may issue Releases, which are any distributions made outside the Project’s Committers. All Releases must comply with the Eclipse IP Policy, be approved according to Eclipse Foundation requirements, and provide a clear link between the released artifacts and their source code. Projects may issue Releases for up to one year following a successful Progress or Release Review, with additional reviews required at the discretion of the Project Leadership Chain.
+Releases in Eclipse projects must strictly adhere to the [Eclipse Foundation IP Policy](https://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf) to ensure legal compliance and maintain project quality. Any build distributed outside of the project's committers constitutes a Release and must follow the formal approval process.
 
-Certain exceptions apply:
+Key Requirements:
 
-* Nightly and Integration Builds: Shared only with developers and early adopters, without public promotion.
-* Milestone and Release Candidate Builds: Publicly shareable for testing, but clearly labeled and accompanied by disclaimers indicating they are not official Releases.
-* Service Releases without new features: May be issued without an additional review.
+* __IP Policy Compliance__: Before any Release, the Project Lead must confirm that all IP due diligence and approvals are complete in accordance with the Eclipse IP Policy.
+* __Source Linkage__: Every Release artifact must be traceable to its corresponding source code.
+* __Release Validity__: Projects can make official Releases for one year following a successful Progress or Release Review; additional reviews may be required by the project leadership.
 
-All Releases from Projects in the Incubation Phase must be clearly marked as such (see Incubation Branding). Proper Releases, reviews, and labeling are mandatory to ensure software quality.
+Exceptions:
+
+* Nightly & Integration Builds: Allowed only for developers and early adopters; no public links should encourage general use.
+* Milestone & Release Candidate Builds: May be shared publicly with clear labeling and caveats (e.g. alpha, beta, RC).
+* Service Releases: Maintenance updates without new features do not require a new review.
 
 ---
 

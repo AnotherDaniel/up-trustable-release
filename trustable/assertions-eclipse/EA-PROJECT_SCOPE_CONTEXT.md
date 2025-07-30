@@ -1,5 +1,5 @@
 ---
-level: 1.1
+level: 2.2.1
 normative: false
 ---
 
@@ -12,7 +12,7 @@ A clear and realistic project scope is essential for ensuring project success at
 Each proposal must include:
 
 * A concise project description
-* A well-defined scope (3–5 sentences, present tense)
+* A well-defined scope
 * Initial project leads and committers
 
 Project metadata, including scope, must be kept up to date.

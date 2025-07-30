@@ -1,9 +1,9 @@
 ---
-level: 2.1.1
+level: 2.0.1
 normative: false
 ---
 
-The [Eclipse Foundation Project Handbook](https://www.eclipse.org/projects/handbook/) defines how Eclipse Foundation projects operate:
+The [Eclipse Foundation Project Handbook](https://www.eclipse.org/projects/handbook/) defines how Eclipse Foundation projects operate.
 
 **Eclipse Project Handbook: A Comprehensive Guide to Professional Open Source Development**
 
@@ -31,7 +31,7 @@ The processes outlined in the Handbook are designed for organizations that need 
 
 This comprehensive approach transforms ad-hoc open source development into a professional, sustainable practice that enterprises can depend on for decades-long software investments.
 
-## Eclipse Foundation Project Handbook Alignment Analysis
+## Eclipse Foundation Project Handbook Alignment with TSF tenets
 
 Here's how the Eclipse Project Handbook implements and supports TSF goals:
 

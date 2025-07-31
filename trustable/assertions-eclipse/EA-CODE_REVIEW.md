@@ -3,4 +3,6 @@ level: 2.9
 normative: true
 ---
 
-The [Eclipse Foundation Project Handbook (section Project Resources and Services)](https://www.eclipse.org/projects/handbook/#project-resources-and-services) recommends that changes to Eclipse projects always go through review, and are only merged on approval.
+According to the [Eclipse Foundation Project Handbook (section Project Resources and Services)](https://www.eclipse.org/projects/handbook/#project-resources-and-services), it is recommended that:
+
+Any changes to an Eclipse projects always go through review, and are only merged on approval.

@@ -17,6 +17,7 @@ WORKSPACE_DIR="/up-trustable-release"
 
 ASSET_DOWNLOAD=${ASSET_DOWNLOAD:-"true"}
 ASSET_LOCATION="${WORKSPACE_DIR}/release_artifacts"
+ASSET_ARCHIVE_NAME="tsffer_assets.tar.bz2"
 CURRENT_LOG_LEVEL=${LOG_LEVEL:-${LOG_LEVEL_DEBUG}}
 LOG_TIMESTAMP=${LOG_TIMESTAMP:-"false"}
 
@@ -80,6 +81,11 @@ main() {
     log_error "gh binary could not be found. Exiting."
     exit 1
   fi
+  # Check if tar binary is available
+  if ! command -v tar &> /dev/null; then
+    log_error "tar binary could not be found. Exiting."
+    exit 1
+  fi
 
   mkdir -p ${ASSET_LOCATION}
 
@@ -122,10 +128,27 @@ retrieve_manifests() {
   log_info "Retrieving manifest from: ${repository}, release/tag: ${tag}"
 
   mkdir -p "${ASSET_LOCATION}/${component}"
-  if ! gh release download ${tag} --clobber --repo ${repository} --pattern '*.tsffer' --dir "${ASSET_LOCATION}/${component}"; then
-    log_error "Failed to download tsffer manifests from: ${url}"
-    rm -rf "${ASSET_LOCATION:?}/${component}"
+
+  # First, try to download tsffer asset archive
+  if gh release download ${tag} --clobber --repo ${repository} --pattern "${ASSET_ARCHIVE_NAME}" --dir "${ASSET_LOCATION}/${component}"; then
+    tar -xjf "${ASSET_LOCATION}/${component}/${ASSET_ARCHIVE_NAME}" -C "${ASSET_LOCATION}/${component}"
+    rm -f "${ASSET_LOCATION}/${component}/${ASSET_ARCHIVE_NAME}"
+  else
+    log_debug "Failed to download tsffer manifest package from: ${url}"
   fi
+
+  # Then, try to download any individual .tsffer files
+  if ! gh release download ${tag} --clobber --repo ${repository} --pattern '*.tsffer' --dir "${ASSET_LOCATION}/${component}"; then
+    log_debug "Failed to download individual tsffer manifests from: ${url}"
+  fi
+
+  if [ -z "$(find "${ASSET_LOCATION:?}/${component}" -mindepth 1 -print -quit)" ]; then
+    log_error "Failed to download any tsffer manifests from: ${url}"
+    rm -rf "${ASSET_LOCATION:?}/${component}"
+  else
+    log_info "Successfully retrieved tsffer manifests from: ${url}"
+  fi
+
 }
 
 # Function to retrieve all release assets for a component as referenced in downloaded .tsffer manifests (will overwrite existing files)
@@ -133,11 +156,17 @@ retrieve_assets() {
   local path=$1
 
   find "${path}" -type f -name "*.tsffer" | while read -r tsffer_file; do
-    log_info "Processing tsffer file: ${tsffer_file}"
+    log_debug "Processing asset download for tsffer file: ${tsffer_file}"
 
     # Extract information from the .tsffer file
     local download_url
-    download_url=$(jq -r '.["asset-info"]["download-url"]' "${tsffer_file}")
+    download_url=$(jq -r '.["asset-info"]["download-url"] // empty' "${tsffer_file}")
+    
+    if [[ -z "${download_url}" ]]; then
+        log_debug "No asset download URL found, continuing..."
+        continue
+    fi
+
     local name
     name=$(jq -r '.["asset-info"]["name"]' "${tsffer_file}")
 

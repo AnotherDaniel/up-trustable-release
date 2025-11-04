@@ -15,19 +15,20 @@
 
 - *Description*: All Eclipse project source code is kept and made publicly accessibly via Eclipse-managed infrastructure
   - *TSF*: TA-RELEASES
-  - *Eclipse Handbook*: ""Project Resources and Services", "External Resources"
+  - *Eclipse Handbook*: "Project Resources and Services", "External Resources"
   - *Evidence*: Source code repo is part of Eclipse-managed organization
 
 - *Description*: Each release of an Eclipse project undergoes formal review and approval
   - *TSF*: TA-RELEASES
   - *Eclipse Handbook*: "Project Releases and Reviews" "Releases"
   - *Evidence*: Release review documentation on eclipse.org
-  - *Evidence*: PMC approval votes for releases
+  - *Evidence*: PMC approval votes for releases, e.g. documented on level of release PR / MR (to be documented in the repository in some form)
 
 - *Description*: Technical metadata of an Eclipse project is always correct and up to date
   - *TSF*: TA-RELEASES, TA-TESTS
   - *Eclipse Handbook*: "Project Resources and Services"
-  - *Evidence*: Project repository
+  - *Evidence*: Project repository, including e.g. Cargo.toml, jar index files, etc
+  - *Evidence*: Project CI in some form checking/using/validating metadata
 
 - *Description*: Build instructions for Eclipse projects are documented and publicly accessible, easily reproducible by anyone
   - *TSF*: TA-RELEASES, TA-TESTS
@@ -48,7 +49,19 @@
   - *Eclipse Foundation Development Process*: "Principles", "Open Rules of Engagement" (Section 2.1)
   - *Evidence*: Project repository, related infrastructure like discussion boards and issue trackers
 
+- *Description*: All Eclipse project tickets, issue discussions, bug reports and decisions are done in a healthy manner, are addressed, are actually resolved etc...
+  - *TSF*: TA-FIXES
+  - *Eclipse Handbook*:
+  - *Eclipse Foundation Development Process*: 
+  - *Evidence*: Project repository, related infrastructure like discussion boards and issue trackers
+
 - *Description*: All changes to Eclipse projects are tracked through version control with full attribution
+  - *TSF*: TA-FIXES
+  - *Eclipse Handbook*: "Project Resources and Services"
+  - *Evidence*: Git commit history with author attribution
+  - *Evidence*: Pull/merge request records with review history
+
+- *Description*: Changes to Eclipse projects are encouraged to go through review, and only merged on approval
   - *TSF*: TA-FIXES
   - *Eclipse Handbook*: "Project Resources and Services"
   - *Evidence*: Git commit history with author attribution
@@ -86,7 +99,7 @@
   - *TSF*: TA-METHODOLOGIES
   - *Eclipse Development Process*: "3 Requirements"
   - *Evidence*: Eclipse Development Process compliance documentation
-  - *Evidence*: Project lifecycle milestone completion records
+  - *Evidence*: Project lifecycle milestone completion records <- Check this, where are they, what are they?
 
 ---
 

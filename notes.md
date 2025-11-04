@@ -1,5 +1,18 @@
 # Various notes and ideas for how to do this
 
+## EF Handbook
+
+- projects must use git
+- must work directly in open repo (no periodic private syncs)
+- must use public issue trackers in eg GitHub
+- authors must provide name, have ECA signed (no anonymous contributions)
+- PRs should mention issue ID
+- Roles, and the associated rights, responsibilities and access levels for GitHub or GitLab
+- SBOMs encouraged, for supply chain security
+- SECURITY.md encouraged for security reporting advice
+- EF is a CVE numbering authority
+- detailed CVE reporting process
+
 ## TODO
 
 - tsffer feature: link-as-evidence (in addition to pointing to files)

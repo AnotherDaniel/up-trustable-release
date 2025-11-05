@@ -27,7 +27,7 @@ print_help() {
   echo "  -n, --no-download  Do not download actual release assets (only download tsffer manifests)"  
   echo "  -t                 Enable logging timestamps"
   echo "  -v                 Increase verbosity level"
-  echo "  -w <directory>     Set the workspace directory"
+  echo "  -w <directory>     Set the asset directory"
   echo "  --cleanup          Clean up component manifest data"
   echo "  --help             Display this help message"
 }

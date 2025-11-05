@@ -48,12 +48,12 @@ log_warn() {
 
 log_info() {
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_INFO} ]]; then
-    echo "[INFO]  $(get_timestamp)$*"
+    echo "[INFO]  $(get_timestamp)$*" >&2
   fi
 }
 
 log_debug() {
   if [[ ${CURRENT_LOG_LEVEL} -ge ${LOG_LEVEL_DEBUG} ]]; then
-    echo -e "${BLUE}[DEBUG]${NC} $(get_timestamp)$*"
+    echo -e "${BLUE}[DEBUG]${NC} $(get_timestamp)$*" >&2
   fi
 }
